@@ -1,7 +1,8 @@
-<form data-search-form class="grid max-w-125 gap-6 pb-8" role="search">
+<form data-search-form class="grid w-full max-w-125 gap-4" role="search">
 <div>
 <label class="is-technical-scale mb-3 flex" for="query">Keress terméket</label>
-<input id="query" name="q" type="search" placeholder="pl. kapucnis pulóver" class="@@FIELD_CLASS@@" />
+<input id="query" name="q" type="search" autocomplete="off" placeholder="pl. kapucnis pulóver" class="@@FIELD_CLASS@@" aria-controls="search-results" />
 </div>
-<p data-search-status role="status" hidden>Nincs találat.</p>
+<p data-search-count role="status" class="is-technical-scale text-white/70"></p>
+<p data-search-status class="border-t border-white/20 pt-4" hidden>Nincs találat. Próbálj másik kifejezést.</p>
 </form>

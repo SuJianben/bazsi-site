@@ -10,8 +10,8 @@
 <base href="../">
 <script>const storeRoot = new URL("../", location.href);document.querySelector("base").href = storeRoot.href;</script>
 <link rel="stylesheet" href="assets/reference/theme.css">
-<link rel="stylesheet" href="src/reference/storefront.css?v=57695102f849">
-<script type="module" src="src/reference/storefront.js?v=9d9c4e4359ad"></script>
+<link rel="stylesheet" href="src/reference/storefront.css?v=5ba83e82476b">
+<script type="module" src="src/reference/storefront.js?v=6705fbc10bb4"></script>
 <script defer src="assets/reference/theme.js"></script>
 </head>
 <body class="min-h-screen">
@@ -353,24 +353,18 @@
 </div>
 
 <div id="page-frame">
-<main id="page-content" tabindex="-1"><section class="banner relative -mb-px flex min-h-lvh overflow-hidden bg-light-black py-24! text-white">
-<div class="absolute top-0 left-0 z-20 h-full w-full bg-black/40"></div>
-<img alt="" class="absolute top-0 left-0 h-[120%] w-full object-cover will-change-transform" data-banner-parallax="" src="assets/hoodie.png"/>
-<div aria-hidden="true" class="pointer-events-none absolute inset-0 z-40" data-shutter-scroll-transition=""></div>
-<div class="relative z-30 container flex grow flex-col items-center justify-center">
-<div class="block-content sm:w-1/2">
-<h1 class="is-h3 text-center opacity-0" data-banner-heading="">Keresés</h1>
-</div>
-</div>
-</section>
-<section class="bg-light-black text-white "><div class="container"><form data-search-form class="grid max-w-125 gap-6 pb-8" role="search">
+<main id="page-content" tabindex="-1"><section class="store-tool-page bg-light-black text-white">
+<div class="container flex flex-col gap-8 lg:gap-14">
+<h1 class="is-h3 opacity-0" data-banner-heading>Keresés</h1>
+<form data-search-form class="grid w-full max-w-125 gap-4" role="search">
 <div>
 <label class="is-technical-scale mb-3 flex" for="query">Keress terméket</label>
-<input id="query" name="q" type="search" placeholder="pl. kapucnis pulóver" class="store-field w-full rounded border-2 border-light-black bg-white px-4 py-2.5 text-light-black focus:outline-2 focus:outline-offset-2 focus:outline-light-black" />
+<input id="query" name="q" type="search" autocomplete="off" placeholder="pl. kapucnis pulóver" class="store-field w-full rounded border-2 border-light-black bg-white px-4 py-2.5 text-light-black focus:outline-2 focus:outline-offset-2 focus:outline-light-black" aria-controls="search-results" />
 </div>
-<p data-search-status role="status" hidden>Nincs találat.</p>
+<p data-search-count role="status" class="is-technical-scale text-white/70"></p>
+<p data-search-status class="border-t border-white/20 pt-4" hidden>Nincs találat. Próbálj másik kifejezést.</p>
 </form>
-<div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3" id="search-results"><div class="min-w-0" data-search-name="Felnőtt kapucnis pulóver"><div class="w-9/10 shrink-0 pr-3 sm:w-3/5 sm:pr-3 md:w-[calc(50%+0.5em)] lg:w-[calc(33.3333%+0.25em)] xl:w-[calc(25%+0.25em)] 3xl:w-[calc(20%+0.25em)]">
+<div class="grid grid-cols-1 gap-4 sm:gap-y-8 lg:gap-x-6 lg:gap-y-12 sm:grid-cols-2 lg:grid-cols-3" id="search-results"><div class="min-w-0" data-search-name="Felnőtt kapucnis pulóver">
 <div class="group/tease relative h-full w-full overflow-hidden rounded-xl bg-white/10 p-[1.5px] text-white will-change-transform select-none" data-p="">
 <article class="relative flex h-full w-full flex-col gap-4 rounded-[11px] bg-light-black p-4">
 <a aria-label="Felnőtt kapucnis pulóver" class="[container-type:inline-size] relative aspect-square w-full overflow-hidden rounded-xs bg-hot-pink" href="products/felnott-pulover/">
@@ -437,7 +431,7 @@
 </div>
 </div>
 <div class="flex grow items-end">
-<a aria-label="Megnézem" class="is-button is-technical-scale group/btn relative inline-block min-w-[250px] [transform:rotate(calc(var(--dir)*var(--tilt)*var(--on,0)))] transition-transform duration-300 ease-fancy [--dir:var(--btn-dir,1)] [--face:3.25em] [--tilt:-4deg] [--turn:80deg] [perspective:700px] hover:z-10 hover:[--on:1] mt-[1em] group-hover/tease:[--on:1] w-full [--tilt:0deg] [--turn:90deg] [--btn-dir:1]" href="products/felnott-pulover/" target="_self">
+<a aria-label="Megnézem" class="is-button is-technical-scale group/btn relative inline-block min-w-0 [transform:rotate(calc(var(--dir)*var(--tilt)*var(--on,0)))] transition-transform duration-300 ease-fancy [--dir:var(--btn-dir,1)] [--face:3.25em] [--tilt:-4deg] [--turn:80deg] [perspective:700px] hover:z-10 hover:[--on:1] mt-[1em] group-hover/tease:[--on:1] w-full [--tilt:0deg] [--turn:90deg] [--btn-dir:1]" href="products/felnott-pulover/" target="_self">
 <span class="relative block h-[var(--face)] [transform:translateZ(calc(var(--face)/-2))_rotateX(calc(var(--dir)*var(--turn)*var(--on,0)))] transition-transform duration-300 ease-fancy [transform-style:preserve-3d]">
 <span class="relative flex h-full w-full [transform:translateZ(calc(var(--face)/2))] items-center justify-center gap-2 rounded border-2 border-black px-8 [filter:brightness(calc(1-0.1*var(--on,0)))] transition-[filter] duration-300 ease-fancy backface-hidden bg-white text-black">
 <svg class="size-[max(14px,0.75vw)] shrink-0" fill="none" viewbox="0 0 15 12" xmlns="http://www.w3.org/2000/svg">
@@ -457,7 +451,7 @@
 </article>
 </div>
 </div>
-</div><div class="min-w-0" data-search-name="Gyerek kapucnis pulóver"><div class="w-9/10 shrink-0 pr-3 sm:w-3/5 sm:pr-3 md:w-[calc(50%+0.5em)] lg:w-[calc(33.3333%+0.25em)] xl:w-[calc(25%+0.25em)] 3xl:w-[calc(20%+0.25em)]">
+<div class="min-w-0" data-search-name="Gyerek kapucnis pulóver">
 <div class="group/tease relative h-full w-full overflow-hidden rounded-xl bg-white/10 p-[1.5px] text-white will-change-transform select-none" data-p="">
 <article class="relative flex h-full w-full flex-col gap-4 rounded-[11px] bg-light-black p-4">
 <a aria-label="Gyerek kapucnis pulóver" class="[container-type:inline-size] relative aspect-square w-full overflow-hidden rounded-xs bg-light-purple" href="products/gyerek-pulover/">
@@ -524,7 +518,7 @@
 </div>
 </div>
 <div class="flex grow items-end">
-<a aria-label="Megnézem" class="is-button is-technical-scale group/btn relative inline-block min-w-[250px] [transform:rotate(calc(var(--dir)*var(--tilt)*var(--on,0)))] transition-transform duration-300 ease-fancy [--dir:var(--btn-dir,1)] [--face:3.25em] [--tilt:-4deg] [--turn:80deg] [perspective:700px] hover:z-10 hover:[--on:1] mt-[1em] group-hover/tease:[--on:1] w-full [--tilt:0deg] [--turn:90deg] [--btn-dir:1]" href="products/gyerek-pulover/" target="_self">
+<a aria-label="Megnézem" class="is-button is-technical-scale group/btn relative inline-block min-w-0 [transform:rotate(calc(var(--dir)*var(--tilt)*var(--on,0)))] transition-transform duration-300 ease-fancy [--dir:var(--btn-dir,1)] [--face:3.25em] [--tilt:-4deg] [--turn:80deg] [perspective:700px] hover:z-10 hover:[--on:1] mt-[1em] group-hover/tease:[--on:1] w-full [--tilt:0deg] [--turn:90deg] [--btn-dir:1]" href="products/gyerek-pulover/" target="_self">
 <span class="relative block h-[var(--face)] [transform:translateZ(calc(var(--face)/-2))_rotateX(calc(var(--dir)*var(--turn)*var(--on,0)))] transition-transform duration-300 ease-fancy [transform-style:preserve-3d]">
 <span class="relative flex h-full w-full [transform:translateZ(calc(var(--face)/2))] items-center justify-center gap-2 rounded border-2 border-black px-8 [filter:brightness(calc(1-0.1*var(--on,0)))] transition-[filter] duration-300 ease-fancy backface-hidden bg-white text-black">
 <svg class="size-[max(14px,0.75vw)] shrink-0" fill="none" viewbox="0 0 15 12" xmlns="http://www.w3.org/2000/svg">
@@ -544,7 +538,7 @@
 </article>
 </div>
 </div>
-</div><div class="min-w-0" data-search-name="Felnőtt póló"><div class="w-9/10 shrink-0 pr-3 sm:w-3/5 sm:pr-3 md:w-[calc(50%+0.5em)] lg:w-[calc(33.3333%+0.25em)] xl:w-[calc(25%+0.25em)] 3xl:w-[calc(20%+0.25em)]">
+<div class="min-w-0" data-search-name="Felnőtt póló">
 <div class="group/tease relative h-full w-full overflow-hidden rounded-xl bg-white/10 p-[1.5px] text-white will-change-transform select-none" data-p="">
 <article class="relative flex h-full w-full flex-col gap-4 rounded-[11px] bg-light-black p-4">
 <a aria-label="Felnőtt póló" class="[container-type:inline-size] relative aspect-square w-full overflow-hidden rounded-xs bg-blue-skies" href="products/felnott-polo/">
@@ -611,7 +605,7 @@
 </div>
 </div>
 <div class="flex grow items-end">
-<a aria-label="Megnézem" class="is-button is-technical-scale group/btn relative inline-block min-w-[250px] [transform:rotate(calc(var(--dir)*var(--tilt)*var(--on,0)))] transition-transform duration-300 ease-fancy [--dir:var(--btn-dir,1)] [--face:3.25em] [--tilt:-4deg] [--turn:80deg] [perspective:700px] hover:z-10 hover:[--on:1] mt-[1em] group-hover/tease:[--on:1] w-full [--tilt:0deg] [--turn:90deg] [--btn-dir:1]" href="products/felnott-polo/" target="_self">
+<a aria-label="Megnézem" class="is-button is-technical-scale group/btn relative inline-block min-w-0 [transform:rotate(calc(var(--dir)*var(--tilt)*var(--on,0)))] transition-transform duration-300 ease-fancy [--dir:var(--btn-dir,1)] [--face:3.25em] [--tilt:-4deg] [--turn:80deg] [perspective:700px] hover:z-10 hover:[--on:1] mt-[1em] group-hover/tease:[--on:1] w-full [--tilt:0deg] [--turn:90deg] [--btn-dir:1]" href="products/felnott-polo/" target="_self">
 <span class="relative block h-[var(--face)] [transform:translateZ(calc(var(--face)/-2))_rotateX(calc(var(--dir)*var(--turn)*var(--on,0)))] transition-transform duration-300 ease-fancy [transform-style:preserve-3d]">
 <span class="relative flex h-full w-full [transform:translateZ(calc(var(--face)/2))] items-center justify-center gap-2 rounded border-2 border-black px-8 [filter:brightness(calc(1-0.1*var(--on,0)))] transition-[filter] duration-300 ease-fancy backface-hidden bg-white text-black">
 <svg class="size-[max(14px,0.75vw)] shrink-0" fill="none" viewbox="0 0 15 12" xmlns="http://www.w3.org/2000/svg">
@@ -631,7 +625,7 @@
 </article>
 </div>
 </div>
-</div><div class="min-w-0" data-search-name="Gyerek póló"><div class="w-9/10 shrink-0 pr-3 sm:w-3/5 sm:pr-3 md:w-[calc(50%+0.5em)] lg:w-[calc(33.3333%+0.25em)] xl:w-[calc(25%+0.25em)] 3xl:w-[calc(20%+0.25em)]">
+<div class="min-w-0" data-search-name="Gyerek póló">
 <div class="group/tease relative h-full w-full overflow-hidden rounded-xl bg-white/10 p-[1.5px] text-white will-change-transform select-none" data-p="">
 <article class="relative flex h-full w-full flex-col gap-4 rounded-[11px] bg-light-black p-4">
 <a aria-label="Gyerek póló" class="[container-type:inline-size] relative aspect-square w-full overflow-hidden rounded-xs bg-red-hot" href="products/gyerek-polo/">
@@ -698,7 +692,7 @@
 </div>
 </div>
 <div class="flex grow items-end">
-<a aria-label="Megnézem" class="is-button is-technical-scale group/btn relative inline-block min-w-[250px] [transform:rotate(calc(var(--dir)*var(--tilt)*var(--on,0)))] transition-transform duration-300 ease-fancy [--dir:var(--btn-dir,1)] [--face:3.25em] [--tilt:-4deg] [--turn:80deg] [perspective:700px] hover:z-10 hover:[--on:1] mt-[1em] group-hover/tease:[--on:1] w-full [--tilt:0deg] [--turn:90deg] [--btn-dir:1]" href="products/gyerek-polo/" target="_self">
+<a aria-label="Megnézem" class="is-button is-technical-scale group/btn relative inline-block min-w-0 [transform:rotate(calc(var(--dir)*var(--tilt)*var(--on,0)))] transition-transform duration-300 ease-fancy [--dir:var(--btn-dir,1)] [--face:3.25em] [--tilt:-4deg] [--turn:80deg] [perspective:700px] hover:z-10 hover:[--on:1] mt-[1em] group-hover/tease:[--on:1] w-full [--tilt:0deg] [--turn:90deg] [--btn-dir:1]" href="products/gyerek-polo/" target="_self">
 <span class="relative block h-[var(--face)] [transform:translateZ(calc(var(--face)/-2))_rotateX(calc(var(--dir)*var(--turn)*var(--on,0)))] transition-transform duration-300 ease-fancy [transform-style:preserve-3d]">
 <span class="relative flex h-full w-full [transform:translateZ(calc(var(--face)/2))] items-center justify-center gap-2 rounded border-2 border-black px-8 [filter:brightness(calc(1-0.1*var(--on,0)))] transition-[filter] duration-300 ease-fancy backface-hidden bg-white text-black">
 <svg class="size-[max(14px,0.75vw)] shrink-0" fill="none" viewbox="0 0 15 12" xmlns="http://www.w3.org/2000/svg">
@@ -718,7 +712,10 @@
 </article>
 </div>
 </div>
-</div></div></div></section></main>
+</div>
+</div>
+</section>
+</main>
 <div class="-mt-px" data-site-footer="">
 
 <section class="bg-light-black" data-footer-feature="">
