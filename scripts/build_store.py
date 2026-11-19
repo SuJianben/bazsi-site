@@ -12,6 +12,12 @@ products = json.loads(subprocess.check_output([
     "import {products} from './src/data/products.js'; console.log(JSON.stringify(products));",
 ], cwd=ROOT, encoding="utf-8"))
 groups = {"felnott": "Felnőtt", "gyerek": "Gyerek"}
+card_styles = {
+    "felnott-pulover": ("hot-pink", "pink", "3", "0.9", "M0 350 L0 250 A200 200 0 0 1 400 250 L400 350 Z"),
+    "gyerek-pulover": ("light-purple", "purple", "4.6", "1.2", "M50 65 L150 65 L150 155 L250 155 L250 245 L350 245 L350 335 L50 335 Z"),
+    "felnott-polo": ("blue-skies", "blue", "3.4", "0.9", "M200 50 L400 350 L0 350 Z"),
+    "gyerek-polo": ("red-hot", "red", "2.1", "0.9", "M200 0 L400 200 L200 400 L0 200 Z"),
+}
 
 
 def template(name, **values):
@@ -25,19 +31,30 @@ def small_link(label, href):
     return f'<a class="is-tag inline-block rounded-xs bg-white px-5 py-3 text-black transition-colors hover:bg-hello-yellow" href="{href}">{label}</a>'
 
 
-def card(product):
+def animated_type(label):
+    return label[0] + f'<span class="font-heading-special text-[0.9em]">{label[1]}</span>' + label[2:]
+
+
+def card(product, scope, *, in_rail=False):
+    color, pairing, mask_scale, mask_hover, mask_path = card_styles.get(product["id"], card_styles["felnott-pulover"])
+    name = escape(product["name"])
+    heading = name.replace(" ", " <br>", 1) if in_rail and product["type"] == "PÓLÓ" else name
     return template("card", product_path=f"products/{product['id']}/",
-                    product_name=escape(product["name"]), product_type=product["type"],
+                    product_name=name, product_heading=heading, product_type=product["type"],
                     product_group=groups[product["group"]], product_image=product["image"],
-                    product_meta="Fekete · " + " / ".join(product["sizes"]))
+                    product_marquee=animated_type(product["type"]),
+                    product_sizes=" / ".join(product["sizes"]), card_color=color,
+                    card_pairing=pairing, mask_path=mask_path, mask_scale=mask_scale,
+                    mask_hover=mask_hover, mask_id=f"card-{scope}-{product['id']}",
+                    rail_spacing=" pb-5" if in_rail else "")
 
 
-def grid(items, searching=False):
+def grid(items, scope, searching=False):
     attrs = ' id="search-results"' if searching else ''
     cards = []
     for item in items:
         data = f' data-search-name="{escape(item["name"])}"' if searching else ''
-        cards.append(f'<div class="min-w-0"{data}>{card(item)}</div>')
+        cards.append(f'<div class="min-w-0"{data}>{card(item, scope)}</div>')
     return f'<div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3"{attrs}>' + ''.join(cards) + '</div>'
 
 
@@ -49,6 +66,8 @@ def write_page(route, title, content, filename="index.html"):
     depth = len(route.strip("/").split("/")) if route else 0
     prefix = "../" * depth or "./"
     title = escape(title)
+    footer = template("footer", wordmark=template("wordmark-paths"),
+                      footer_feature=template("home-footer-feature") if not route and filename == "index.html" else "")
     initial = (
         'const storeRoot = new URL(' + json.dumps(prefix) + ', location.href);'
         'document.querySelector("base").href = storeRoot.href;'
@@ -76,7 +95,7 @@ def write_page(route, title, content, filename="index.html"):
 {template("icon-burst")}
 <div id="page-frame">
 <main id="page-content" tabindex="-1">{content}</main>
-{template("footer")}
+{footer}
 </div>
 </body>
 </html>
@@ -105,24 +124,25 @@ def detail(title, image, tag, body, aside):
 
 def main():
     spaces = {}
-    titles = ["PULÓVER", "GYEREK PULÓVER", "PÓLÓ", "GYEREK PÓLÓ"]
     for i, product in enumerate(products):
-        spaces.update({f"space_title_{i}": titles[i], f"space_image_{i}": product["image"],
+        spaces.update({f"space_image_{i}": product["image"],
                        f"space_name_{i}": escape(product["name"]),
                        f"space_path_{i}": f"products/{product['id']}/"})
+    wordmark = template("wordmark-paths")
+    about = template("home-about", wordmark=wordmark, crest_id="home-brand-crest")
     home = (template("home-hero") + template("home-film")
-            + template("home-rail", all_slides=''.join(map(card, products)),
-                       kids_slides=''.join(card(p) for p in products if p["group"] == "gyerek"))
-            + template("home-drop") + template("tiles") + template("home-journal")
-            + template("home-spaces", **spaces) + template("home-about") + template("home-story"))
+            + template("home-rail", all_slides=''.join(card(p, "home-all", in_rail=True) for p in products),
+                       kids_slides=''.join(card(p, "home-kids", in_rail=True) for p in products if p["group"] == "gyerek"))
+            + template("home-drop") + template("tiles", tile_scope="home") + template("home-journal")
+            + template("home-spaces", **spaces) + about + template("home-story"))
     write_page("", "Bazsi", home)
-    write_page("collections", "Sorozatok", banner("Sorozatok") + template("tiles"))
+    write_page("collections", "Sorozatok", banner("Sorozatok") + template("tiles", tile_scope="collections"))
     for slug, title in [("all", "Összes termék"), ("felnott", "Felnőtt kollekció"), ("gyerek", "Gyerek kollekció")]:
         switches = '<nav class="flex flex-wrap gap-2 pb-8" aria-label="Sorozatok">' + ''.join(
             small_link(label, f"collections/{key}/")
             for key, label in [("all", "Összes"), ("felnott", "Felnőtt"), ("gyerek", "Gyerek")]) + '</nav>'
         items = [item for item in products if slug == "all" or item["group"] == slug]
-        write_page(f"collections/{slug}", title, banner(title) + section(switches + grid(items)))
+        write_page(f"collections/{slug}", title, banner(title) + section(switches + grid(items, f"collection-{slug}")))
     for product in products:
         sizes = ''.join(f'<option class="bg-white text-black" value="{size}">{size}</option>' for size in product["sizes"])
         form = (f'<form data-product-form="{product["id"]}" class="flex flex-col gap-4">'
@@ -132,7 +152,7 @@ def main():
                 '<p data-cart-status role="status"></p></form>')
         panel = '<h2 class="is-section-label">Termékadatok</h2><p>Szín: fekete</p>' + form
         related = section('<h2 class="is-h4 pb-8">További termékek</h2>' +
-                          grid([p for p in products if p["id"] != product["id"]]))
+                          grid([p for p in products if p["id"] != product["id"]], f'product-{product["id"]}'))
         write_page(f'products/{product["id"]}', product["name"],
                    detail(product["name"], product["image"], groups[product["group"]],
                           description("Limitless Essentials", [product["description"]]), panel) + related)
@@ -143,13 +163,14 @@ def main():
                                   "Alapdarabok a mindennapokra."]),
                      '<h2 class="is-section-label">Napló</h2>' + small_link("A kollekció", "collections/all/"))
     write_page("blog/hatartalan", "Határok nélkül", article)
-    write_page("about", "A márka", banner("A márka") + template("home-about").replace('href="@@ROOT@@about/"',
+    about_page = template("home-about", wordmark=wordmark, crest_id="about-brand-crest")
+    write_page("about", "A márka", banner("A márka") + about_page.replace('href="@@ROOT@@about/"',
                'href="@@ROOT@@collections/all/"').replace('A történetünk', 'A kollekció') + template("home-story"))
     search_form = ('<form data-search-form class="flex flex-col gap-4 pb-8" role="search">'
                    '<label class="is-technical-scale" for="query">Keress terméket</label>'
                    '<input id="query" name="q" type="search" class="rounded border border-white p-4" />'
                    '<p data-search-status role="status" hidden>Nincs találat.</p></form>')
-    write_page("search", "Keresés", banner("Keresés") + section(search_form + grid(products, searching=True)))
+    write_page("search", "Keresés", banner("Keresés") + section(search_form + grid(products, "search", searching=True)))
     basket = ('<div data-cart-list class="flex flex-col gap-4" aria-live="polite"></div>'
               '<div class="pt-8">' + small_link("Vissza a kollekcióhoz", "collections/all/") + '</div>')
     write_page("cart", "Kosár", banner("A kosarad") + section(basket))
