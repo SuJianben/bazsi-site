@@ -22,6 +22,7 @@ RAIL_CARD_LAYOUT = ("w-9/10 shrink-0 pr-3 sm:w-3/5 sm:pr-3 md:w-[calc(50%+0.5em)
                     "lg:w-[calc(33.3333%+0.25em)] xl:w-[calc(25%+0.25em)] 3xl:w-[calc(20%+0.25em)]")
 FIELD_CLASS = ("store-field w-full rounded border-2 border-light-black bg-white px-4 py-2.5 "
                "text-light-black focus:outline-2 focus:outline-offset-2 focus:outline-light-black")
+DROPDOWN_OPTION_CLASS = "store-dropdown-option is-tag rounded-xs px-3 py-3 text-black transition-colors duration-150"
 card_styles = {
     "felnott-pulover": ("hot-pink", "pink", "3", "0.9", "M0 350 L0 250 A200 200 0 0 1 400 250 L400 350 Z"),
     "gyerek-pulover": ("light-purple", "purple", "4.6", "1.2", "M50 65 L150 65 L150 155 L250 155 L250 245 L350 245 L350 335 L50 335 Z"),
@@ -118,12 +119,29 @@ def collection_filter(current, *, drawer=False):
     options = []
     for slug, label in COLLECTION_FILTERS.items():
         selected = ' aria-current="page"' if slug == current else ''
-        options.append(f'<a class="store-filter-option is-tag rounded-xs px-3 py-3 text-black transition-colors duration-150" '
+        options.append(f'<a class="{DROPDOWN_OPTION_CLASS}" '
                        f'data-events-filter data-collection-option="{slug}" data-no-swup '
                        f'href="collections/{slug}/#collection-results-{slug}"{selected}>{label}</a>')
-    return template("collection-filter", current_label=COLLECTION_FILTERS[current],
+    active = "" if current == "all" else " data-active"
+    return template("dropdown", current_label=COLLECTION_FILTERS[current],
                     width="w-full" if drawer else "w-full sm:w-42",
-                    active="" if current == "all" else " data-active", options=''.join(options))
+                    dropdown_attrs=" data-collection-filter" + active,
+                    summary_attrs="", label_attrs="", options=''.join(options))
+
+
+def product_size_dropdown(product):
+    sizes = [escape(size) for size in product["sizes"]]
+    product_id = product["id"]
+    options = ''.join(
+        f'<button class="{DROPDOWN_OPTION_CLASS} cursor-pointer" type="button" '
+        f'data-size-option="{size}" aria-pressed="{str(index == 0).lower()}">{size}</button>'
+        for index, size in enumerate(sizes)
+    )
+    label_id = f"size-value-{product_id}"
+    return template("dropdown", width="w-full", current_label=sizes[0],
+                    dropdown_attrs=" data-product-size-picker hidden",
+                    summary_attrs=f' aria-labelledby="size-label-{product_id} {label_id}"',
+                    label_attrs=f' id="{label_id}"', options=options)
 
 
 def section(content, extra=""):
@@ -233,8 +251,10 @@ def main():
                    + filters + grid(products, f"collection-{slug}", collection=slug) + '</div>' + drawer + '</section>')
         write_page(f"collections/{slug}", title, banner(title) + listing)
     for product in products:
-        sizes = ''.join(f'<option class="bg-white text-black" value="{size}">{size}</option>' for size in product["sizes"])
+        sizes = ''.join(f'<option class="bg-white text-black" value="{escape(size)}">{escape(size)}</option>'
+                        for size in product["sizes"])
         form = template("form-product", product_id=product["id"], sizes=sizes, field_class=FIELD_CLASS,
+                        size_dropdown=product_size_dropdown(product),
                         submit_button=form_button("Kosárba teszem", "pink-pairing"))
         panel = '<h2 class="is-section-label">Termékadatok</h2><p>Szín: fekete</p>' + form
         related = ('<section class="-mt-px bg-light-black"><div class="container flex flex-col gap-12">'

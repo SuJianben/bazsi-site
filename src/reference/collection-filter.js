@@ -19,7 +19,7 @@ function applyGroup(archive, group) {
     for (const option of filter.querySelectorAll(optionSelector)) {
       if (option.dataset.collectionOption === group) {
         option.setAttribute('aria-current', 'page');
-        filter.querySelector('[data-collection-label]').textContent = option.textContent;
+        filter.querySelector('[data-dropdown-label]').textContent = option.textContent;
       } else {
         option.removeAttribute('aria-current');
       }

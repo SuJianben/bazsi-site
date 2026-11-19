@@ -1,7 +1,8 @@
 import { productById } from '../data/products.js';
 import { track } from '../analytics/events.js?v=2';
 import { mountSearch } from './catalog-ui.js?v=5';
-import { mountCollection } from './collection-filter.js?v=1';
+import { mountCollection } from './collection-filter.js?v=2';
+import { mountProductSizes } from './product-size.js';
 import { renderCart } from './cart-ui.js?v=1';
 import { enableNewsletterPreview } from './newsletter-preview.js?v=1';
 import './home-film-motion.js?v=2';
@@ -40,13 +41,18 @@ function mountPage() {
   enableNewsletterPreview(frame);
   mountSearch(frame);
   mountCollection(frame);
+  mountProductSizes(frame);
   renderCart();
 }
 
 document.addEventListener('swup:visit:start', () => {
-  window.app.transitions.swup.hooks.before('content:insert', () => {
+  const transitions = window.app.transitions;
+  transitions.swup.hooks.before('content:insert', (_visit, { containers }) => {
     // Closing a drawer during navigation can return focus to the old page.
     if (document.activeElement?.closest('#page-frame')) document.activeElement.blur();
+    const incoming = containers.find(({ next }) => next?.id === 'page-frame')?.next;
+    // Extend the reference stack transition to the storefront's detail URLs.
+    if (incoming?.querySelector('[data-store-transition="stack"]')) transitions.overlapping = true;
   });
 }, { once: true });
 document.addEventListener('swup:page:view', mountPage);

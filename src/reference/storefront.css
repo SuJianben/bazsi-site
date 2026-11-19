@@ -27,11 +27,11 @@
   padding-block-end: calc(max(14px, 0.75vw) + 2 * var(--spacing));
 }
 
-.store-collection-filter summary::-webkit-details-marker {
+.store-dropdown summary::-webkit-details-marker {
   display: none;
 }
 
-.store-collection-filter[open] summary svg {
+.store-dropdown[open] summary svg {
   rotate: -90deg;
 }
 
@@ -43,9 +43,17 @@
   overflow-anchor: none;
 }
 
-.store-filter-option:is(:hover, :focus-visible, [aria-current="page"]) {
+.store-dropdown-option {
+  text-align: start;
+}
+
+.store-dropdown-option:is(:hover, :focus-visible, [aria-current="page"], [aria-pressed="true"]) {
   background: var(--color-light-black);
   color: white;
+}
+
+html:has(#page-frame.is-previous-container):has(#page-frame:not(.is-previous-container) [data-store-transition="stack"]) {
+  background-color: white;
 }
 
 .store-tool-page {

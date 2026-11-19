@@ -10,8 +10,8 @@
 <base href="../../">
 <script>const storeRoot = new URL("../../", location.href);document.querySelector("base").href = storeRoot.href;</script>
 <link rel="stylesheet" href="assets/reference/theme.css">
-<link rel="stylesheet" href="src/reference/storefront.css?v=98faff021c80">
-<script type="module" src="src/reference/storefront.js?v=51669d990df1"></script>
+<link rel="stylesheet" href="src/reference/storefront.css?v=5dfc2377a3b2">
+<script type="module" src="src/reference/storefront.js?v=8d7d2a12ad1e"></script>
 <script defer src="assets/reference/theme.js"></script>
 </head>
 <body class="min-h-screen">
@@ -428,7 +428,7 @@
 </div>
 
 <div id="page-frame">
-<main id="page-content" tabindex="-1"><section class="bg-light-black pt-24 pb-4! text-white sm:pt-36! lg:pt-40!">
+<main id="page-content" tabindex="-1"><section class="bg-light-black pt-24 pb-4! text-white sm:pt-36! lg:pt-40!" data-store-transition="stack">
 <div class="store-detail-layout container flex flex-col items-start gap-8 lg:flex-row lg:gap-4 xl:gap-12">
 
 <article class="store-detail-article flex w-full min-w-0 flex-col gap-8 lg:w-3/4 lg:gap-10 lg:rounded-lg lg:bg-black lg:p-8 xl:gap-12 xl:p-12">
@@ -451,8 +451,16 @@
 <aside class="store-detail-aside flex w-full min-w-0 flex-col gap-8 rounded-lg bg-hello-yellow p-6 text-black sm:p-8 lg:sticky lg:top-34 lg:left-0 lg:w-1/4">
 <div class="flex flex-col gap-6 opacity-0 sm:gap-8" data-banner-reveal="0.2"><h2 class="is-section-label">Termékadatok</h2><p>Szín: fekete</p><form data-product-form="gyerek-polo" class="grid gap-6">
 <div>
-<label class="is-technical-scale mb-3 flex" for="size-gyerek-polo">Méret</label>
+<label class="is-technical-scale mb-3 flex" for="size-gyerek-polo" id="size-label-gyerek-polo">Méret</label>
 <select class="store-field w-full rounded border-2 border-light-black bg-white px-4 py-2.5 text-light-black focus:outline-2 focus:outline-offset-2 focus:outline-light-black" id="size-gyerek-polo" name="size"><option class="bg-white text-black" value="L">L</option><option class="bg-white text-black" value="XL">XL</option></select>
+<details class="store-dropdown group relative w-full" data-product-size-picker hidden>
+<summary class="is-tag flex w-full cursor-pointer flex-row items-center justify-between gap-4 rounded-xs border-[1.5px] border-white bg-white py-3 pr-5 pl-6 text-black outline-1 outline-light-black transition-all duration-150 ease-out hover:border-light-black focus:border-light-black focus:opacity-100! hover:outline-real-teal focus:outline-real-teal group-data-[active]:border-real-teal group-data-[active]:bg-real-teal" aria-labelledby="size-label-gyerek-polo size-value-gyerek-polo">
+<span class="truncate" data-dropdown-label id="size-value-gyerek-polo">L</span>
+<svg aria-hidden="true" class="w-[0.4em] shrink-0 rotate-90 transition-transform duration-200 ease-fancy" viewBox="0 0 8 13" fill="none"><path d="M1.073 1.073L6.384 6.384L1.073 11.695" stroke="currentColor" stroke-linecap="square" stroke-linejoin="round" stroke-width="2"></path></svg>
+</summary>
+<div class="absolute top-[calc(100%+0.25em)] left-0 z-20 flex max-h-72 w-full flex-col gap-0.5 overflow-y-auto rounded-sm bg-real-teal p-0.5 text-white"><button class="store-dropdown-option is-tag rounded-xs px-3 py-3 text-black transition-colors duration-150 cursor-pointer" type="button" data-size-option="L" aria-pressed="true">L</button><button class="store-dropdown-option is-tag rounded-xs px-3 py-3 text-black transition-colors duration-150 cursor-pointer" type="button" data-size-option="XL" aria-pressed="false">XL</button></div>
+</details>
+
 </div>
 <button aria-label="Kosárba teszem" class="is-button is-technical-scale group/btn relative block w-full cursor-pointer appearance-none [transform:rotate(calc(var(--dir)*var(--tilt)*var(--on,0)))] transition-transform duration-300 ease-fancy [--dir:var(--btn-dir,1)] [--face:3.25em] [--tilt:-4deg] [--turn:80deg] [perspective:700px] hover:z-10 hover:[--on:1]" type="submit">
 <span class="relative block h-[var(--face)] [transform:translateZ(calc(var(--face)/-2))_rotateX(calc(var(--dir)*var(--turn)*var(--on,0)))] transition-transform duration-300 ease-fancy [transform-style:preserve-3d]">
