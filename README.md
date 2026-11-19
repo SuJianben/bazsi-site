@@ -13,7 +13,7 @@
 - `src/reference/templates` 存放按区块拆分的模板。脚本根据商品数据生成首页、系列、详情、博客、品牌、搜索、购物车和 404。
 - `assets/reference` 存放参考站主题资源。脚本包保持原样，样式表的字体地址指向本地文件。
 - `src/reference/storefront.js` 负责商品搜索、本地购物车、菜单无障碍状态和本地事件记录。动画、滚动、悬停和页面过场由原站前端脚本处理。
-- `src/data/products.js` 存放四款演示商品。商品图片和由它们生成的首页视频在 `assets`。
+- `src/data/products.js` 存放四款演示商品。商品图片在 `assets`。首页弧形区块当前暂用原站视频 `assets/reference/rechabite-website.mp4`。
 - `src/analytics/events.js` 在当前浏览器会话中记录匿名计数。购物车通过浏览器本地存储保存。
 
 参考站为 [The Rechabite](https://therechabite.com.au/)。其第三方包的许可说明保留在原脚本头尾。当前版本使用原站公开前端资源，不依赖原站 WordPress、票务、预约或营销服务。
