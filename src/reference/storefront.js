@@ -1,6 +1,7 @@
 import { addItem, getCart, removeItem } from '../app/cart.js';
 import { productById } from '../data/products.js';
 import { track } from '../analytics/events.js';
+import './home-film-motion.js';
 
 const normalize = value => value.toLocaleLowerCase('hu').normalize('NFD').replace(/\p{Diacritic}/gu, '');
 const asset = path => new URL(path, document.baseURI).href;
