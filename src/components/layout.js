@@ -1,9 +1,5 @@
-export const links = [
-  ['FŐOLDAL', '#/'], ['KOLLEKCIÓ', '#/collections/all'], ['FELNŐTT', '#/collections/felnott'], ['GYEREK', '#/collections/gyerek'], ['NAPLÓ', '#/blog'], ['RÓLUNK', '#/about'], ['KERESÉS', '#/search'], ['KOSÁR', '#/cart']
-];
-export function header() {
-  return `<header class="site-header"><div class="header-bar"><button class="menu-toggle" aria-label="Menü megnyitása" aria-expanded="false" aria-controls="site-menu"><span></span><span></span></button><a class="wordmark" href="#/" aria-label="Limitless Essentials – főoldal"><span>LIMITLESS<small>ESSENTIALS</small></span></a><a class="header-icon" href="#/cart" aria-label="Kosár">△</a></div><nav class="quick-nav" aria-label="Fő navigáció"><a href="#/collections/all">KOLLEKCIÓ</a><a href="#/blog">NAPLÓ</a><a href="#/cart">KOSÁR <span data-cart-count></span></a></nav><nav class="menu-panel" id="site-menu" aria-label="Menü" hidden><div class="menu-links">${links.map(([text,url])=>`<a href="${url}">${text}<span>↗</span></a>`).join('')}</div><p>BAZSI × LIMITLESS ESSENTIALS</p></nav></header>`;
-}
+import { navigation } from './navigation.js';
+export function header() { return navigation(); }
 export function footer() {
   return `<footer class="footer"><div class="footer-top"><div><p class="eyebrow">LIMITLESS ESSENTIALS</p><h2>MARADJ<br>MOZGÁSBAN.</h2></div><a class="outline-button" href="#/collections/all">FEDEZD FEL A KOLLEKCIÓT <span>↗</span></a></div><div class="footer-bottom"><a class="footer-logo" href="#/">LIMITLESS<br>ESSENTIALS</a><div><b>FELFEDEZÉS</b><a href="#/collections/all">Kollekció</a><a href="#/blog">Napló</a><a href="#/about">Rólunk</a></div><div><b>KÖVESS MINKET</b><a href="https://www.instagram.com/therealbazsi" target="_blank" rel="noreferrer">Instagram ↗</a><a href="https://www.tiktok.com/@azigazibazsi" target="_blank" rel="noreferrer">TikTok ↗</a><a href="https://www.youtube.com/@Bazsiplays/videos" target="_blank" rel="noreferrer">YouTube ↗</a></div><div><b>LIMITLESS</b><a href="#/search">Keresés</a><a href="#/cart">Kosár</a></div></div><div class="footer-meta">© LIMITLESS ESSENTIALS <span>BAZSI / HATÁROK NÉLKÜL</span></div></footer>`;
 }
