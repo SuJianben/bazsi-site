@@ -1,0 +1,23 @@
+@font-face {
+  font-family: "Founders Grotesk Condensed";
+  src: url(../../assets/reference/fonts/founders-grotesk-condensed-hu.woff2) format("woff2");
+  unicode-range: U+00C1, U+00C9, U+00CD, U+00D3, U+00D6, U+00DA, U+00DC,
+    U+00E1, U+00E9, U+00ED, U+00F3, U+00F6, U+00FA, U+00FC, U+0150-0151,
+    U+0170-0171;
+}
+
+@font-face {
+  font-family: "Parabole";
+  src: url(../../assets/reference/fonts/parabole-hu.woff2) format("woff2");
+  unicode-range: U+00C1, U+00C9, U+00CD, U+00D3, U+00D6, U+00DA, U+00DC,
+    U+00E1, U+00E9, U+00ED, U+00F3, U+00F6, U+00FA, U+00FC, U+0150-0151,
+    U+0170-0171;
+}
+
+.store-field {
+  color-scheme: light;
+}
+
+[data-search-form] .store-field:focus {
+  outline-color: white;
+}

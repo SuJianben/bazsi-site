@@ -1,5 +1,6 @@
 """Compose the authorized reference markup into a static Hungarian storefront."""
 from html import escape
+from hashlib import sha256
 from pathlib import Path
 import json
 import re
@@ -7,11 +8,15 @@ import subprocess
 
 ROOT = Path(__file__).resolve().parents[1]
 TEMPLATES = ROOT / "src/reference/templates"
+STOREFRONT_SCRIPT = "src/reference/storefront.js"
+SCRIPT_VERSION = sha256((ROOT / STOREFRONT_SCRIPT).read_bytes()).hexdigest()[:12]
 products = json.loads(subprocess.check_output([
     "node", "--input-type=module", "-e",
     "import {products} from './src/data/products.js'; console.log(JSON.stringify(products));",
 ], cwd=ROOT, encoding="utf-8"))
 groups = {"felnott": "Felnőtt", "gyerek": "Gyerek"}
+FIELD_CLASS = ("store-field w-full rounded border-2 border-light-black bg-white px-4 py-2.5 "
+               "text-light-black focus:outline-2 focus:outline-offset-2 focus:outline-light-black")
 card_styles = {
     "felnott-pulover": ("hot-pink", "pink", "3", "0.9", "M0 350 L0 250 A200 200 0 0 1 400 250 L400 350 Z"),
     "gyerek-pulover": ("light-purple", "purple", "4.6", "1.2", "M50 65 L150 65 L150 155 L250 155 L250 245 L350 245 L350 335 L50 335 Z"),
@@ -29,6 +34,12 @@ def template(name, **values):
 
 def small_link(label, href):
     return f'<a class="is-tag inline-block rounded-xs bg-white px-5 py-3 text-black transition-colors hover:bg-hello-yellow" href="{href}">{label}</a>'
+
+
+def form_button(label, color, *, newsletter=False):
+    return template("form-submit", button_label=escape(label), face_color=color,
+                    extra_class=" mt-4 lg:mt-6" if newsletter else "",
+                    button_state="disabled" if newsletter else "")
 
 
 def animated_type(label):
@@ -71,8 +82,10 @@ def write_page(route, title, content, filename="index.html"):
     depth = len(route.strip("/").split("/")) if route else 0
     prefix = "../" * depth or "./"
     title = escape(title)
-    footer = template("footer", wordmark=template("wordmark-paths"),
-                      footer_feature=template("home-footer-feature") if not route and filename == "index.html" else "")
+    page_key = route.replace("/", "-") or ("home" if filename == "index.html" else "not-found")
+    newsletter = template("home-footer-feature", form_id=f"newsletter-{page_key}", field_class=FIELD_CLASS,
+                          submit_button=form_button("Feliratkozás", "red-pairing", newsletter=True))
+    footer = template("footer", wordmark=template("wordmark-paths"), footer_feature=newsletter)
     initial = (
         'const storeRoot = new URL(' + json.dumps(prefix) + ', location.href);'
         'document.querySelector("base").href = storeRoot.href;'
@@ -89,7 +102,8 @@ def write_page(route, title, content, filename="index.html"):
 <base href="{prefix}">
 <script>{initial}</script>
 <link rel="stylesheet" href="assets/reference/theme.css">
-<script type="module" src="src/reference/storefront.js"></script>
+<link rel="stylesheet" href="src/reference/storefront.css">
+<script type="module" src="{STOREFRONT_SCRIPT}?v={SCRIPT_VERSION}"></script>
 <script defer src="assets/reference/theme.js"></script>
 </head>
 <body class="min-h-screen">
@@ -151,11 +165,8 @@ def main():
         write_page(f"collections/{slug}", title, banner(title) + section(switches + grid(items, f"collection-{slug}")))
     for product in products:
         sizes = ''.join(f'<option class="bg-white text-black" value="{size}">{size}</option>' for size in product["sizes"])
-        form = (f'<form data-product-form="{product["id"]}" class="flex flex-col gap-4">'
-                '<label class="is-technical-scale" for="size">Méret</label>'
-                f'<select class="rounded border border-black p-3 text-black" id="size" name="size">{sizes}</select>'
-                '<button type="submit" class="is-tag rounded-xs bg-black px-5 py-3 text-white">Kosárba teszem</button>'
-                '<p data-cart-status role="status"></p></form>')
+        form = template("form-product", product_id=product["id"], sizes=sizes, field_class=FIELD_CLASS,
+                        submit_button=form_button("Kosárba teszem", "pink-pairing"))
         panel = '<h2 class="is-section-label">Termékadatok</h2><p>Szín: fekete</p>' + form
         related = section('<h2 class="is-h4 pb-8">További termékek</h2>' +
                           grid([p for p in products if p["id"] != product["id"]], f'product-{product["id"]}'))
@@ -172,10 +183,7 @@ def main():
     about_page = template("home-about", wordmark=wordmark, crest_id="about-brand-crest")
     write_page("about", "A márka", banner("A márka") + about_page.replace('href="@@ROOT@@about/"',
                'href="@@ROOT@@collections/all/"').replace('A történetünk', 'A kollekció') + template("home-story"))
-    search_form = ('<form data-search-form class="flex flex-col gap-4 pb-8" role="search">'
-                   '<label class="is-technical-scale" for="query">Keress terméket</label>'
-                   '<input id="query" name="q" type="search" class="rounded border border-white p-4" />'
-                   '<p data-search-status role="status" hidden>Nincs találat.</p></form>')
+    search_form = template("form-search", field_class=FIELD_CLASS)
     write_page("search", "Keresés", banner("Keresés") + section(search_form + grid(products, "search", searching=True)))
     basket = ('<div data-cart-list class="flex flex-col gap-4" aria-live="polite"></div>'
               '<div class="pt-8">' + small_link("Vissza a kollekcióhoz", "collections/all/") + '</div>')

@@ -1,5 +1,5 @@
 // Anonymous, session-only interaction counters; no external analytics service is connected.
-const allowed = new Set(['page_view','collection_filter','product_view','add_to_cart','remove_from_cart','search_use']);
+const allowed = new Set(['page_view','collection_filter','product_view','add_to_cart','remove_from_cart','search_use','newsletter_demo_submit']);
 export function track(eventName) {
   if (!allowed.has(eventName)) return;
   try {
