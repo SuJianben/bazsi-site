@@ -21,12 +21,97 @@
 .accordion-content ul{list-style:none;padding:8px 0 0;margin:0}
 .accordion-content a{display:block;padding:0 12px 18px;color:rgba(255,255,255,.6);font-size:12px;font-weight:800}
 .accordion-content a:hover{color:#fff}.accordion-header.active .menu-icon{font-size:0}.accordion-header.active .menu-icon:after{content:'−';font-size:14px}
-.hero-actions .flip-button{position:relative;display:block;flex:1;height:100%;padding:0;border:0;background:transparent;perspective:700px;transition:transform .3s cubic-bezier(.87,0,.13,1)}
-.flip-button-inner{position:relative;display:block;width:100%;height:100%;transform:translateZ(-25px);transform-style:preserve-3d;transition:transform .3s cubic-bezier(.87,0,.13,1)}
-.flip-button-face,.flip-button-back{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;border:2px solid #000;border-radius:3px;color:#000;font-size:12px;font-weight:800;backface-visibility:hidden}
-.flip-button-face{background:#fff;transform:translateZ(25px)}
-.flip-button-back{background:#ffe71c;transform:rotateX(calc(var(--dir)*-90deg)) translateZ(25px)}
-.hero-actions .flip-button:hover,.hero-actions .flip-button:focus-visible{z-index:1;transform:rotate(calc(var(--dir)*-4deg))}
-.flip-button:hover .flip-button-inner,.flip-button:focus-visible .flip-button-inner{transform:translateZ(-25px) rotateX(calc(var(--dir)*80deg))}
-@media(max-width:750px){.nav-shell{padding:0 12px}.menu-face>span:first-child{font-size:24px}.menu-list{padding-top:12px}.hero-actions .flip-button-face,.hero-actions .flip-button-back{font-size:10px}}
-@media(prefers-reduced-motion:reduce){.menu-flip-inner,.flip-button-inner{transition:none}.accordion-content{transition:none}}
+/* Storefront action links share their type, depth, and individual accent. */
+:root {
+  --action-type: "Barlow", Arial, sans-serif;
+  --action-mint: #b0e5c6;
+  --action-lilac: #c7baff;
+  --action-coral: #ff836f;
+}
+
+.quick-nav {
+  display: flex;
+  gap: 4px;
+  margin-top: 5px;
+  height: 45px;
+}
+
+.hero-actions { gap: 4px; }
+
+.flip-button {
+  --face-depth: 25px;
+  position: relative;
+  display: block;
+  flex: 1 1 0;
+  min-width: 0;
+  height: 100%;
+  perspective: 700px;
+  transition: transform .3s cubic-bezier(.87, 0, .13, 1);
+}
+
+.quick-nav .flip-button { --face-depth: 22.5px; }
+.flip-button[data-accent="mint"] { --flip-accent: var(--action-mint); }
+.flip-button[data-accent="lilac"] { --flip-accent: var(--action-lilac); }
+.flip-button[data-accent="coral"] { --flip-accent: var(--action-coral); }
+
+.flip-button-inner {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  transform: translateZ(calc(-1 * var(--face-depth)));
+  transform-style: preserve-3d;
+  transition: transform .3s cubic-bezier(.87, 0, .13, 1);
+}
+
+.flip-button-face, .flip-button-back {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .25em;
+  border-radius: 5px;
+  color: #101010;
+  backface-visibility: hidden;
+  text-align: center;
+}
+
+.flip-button-face { background: #f4f2ef; transform: translateZ(var(--face-depth)); }
+.flip-button-back {
+  background: var(--flip-accent);
+  transform: rotateX(calc(var(--dir) * -90deg)) translateZ(var(--face-depth));
+}
+
+.flip-button-face, .flip-button-back, .white-button, .outline-button, .filter-button {
+  font-family: var(--action-type);
+  font-size: clamp(12px, 1vw, 15px);
+  font-weight: 800;
+  letter-spacing: .035em;
+}
+
+.flip-button:is(:hover, :focus-visible) { z-index: 1; }
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .flip-button:hover { transform: rotate(calc(var(--dir) * -3deg)); }
+  .flip-button:hover .flip-button-inner {
+    transform: translateZ(calc(-1 * var(--face-depth))) rotateX(calc(var(--dir) * 82deg));
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .flip-button:focus-visible .flip-button-inner {
+    transform: translateZ(calc(-1 * var(--face-depth))) rotateX(calc(var(--dir) * 82deg));
+  }
+}
+
+@media (max-width: 750px) {
+  .nav-shell { padding: 0 12px; }
+  .menu-face > span:first-child { font-size: clamp(18px, 5.2vw, 24px); }
+  .menu-list { padding-top: 12px; }
+  .hero-actions .flip-button { --face-depth: 24px; }
+  .filter-button { padding-inline: clamp(10px, 4vw, 29px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .flip-button:is(:hover, :focus-visible) .flip-button-face { background: var(--flip-accent); }
+}

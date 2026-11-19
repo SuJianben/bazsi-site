@@ -1,5 +1,5 @@
 import { illustrations } from './hero-art.js';
-import { flipButton } from './navigation.js';
+import { flipActions } from './navigation.js';
 
 /** The homepage masthead is kept separate from the rest of the page for precise visual tuning. */
 export function hero() {
@@ -12,6 +12,6 @@ export function hero() {
       </h1>
     </div>
     <span class="hero-side hero-side-left">BAZSI</span><span class="hero-side hero-side-right">LE</span>
-    <nav class="hero-actions" aria-label="Felfedezés">${flipButton('KOLLEKCIÓ','#/collections/all',1)}${flipButton('RÓLUNK','#/about')}${flipButton('NAPLÓ','#/blog',-1)}</nav>
+    <nav class="hero-actions" aria-label="Felfedezés">${flipActions(['collection', 'about', 'journal'])}</nav>
   </section>`;
 }
