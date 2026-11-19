@@ -23,9 +23,31 @@
 <span class="is-h6">Napló</span>
 </button>
 </div>
-<div class="flex grow flex-col gap-3" data-book-pane="eat-and-drink"><div aria-live="polite" class="flex flex-col gap-4" data-cart-preview=""></div><a class="is-tag inline-block rounded-xs bg-white px-5 py-3 text-black" href="cart/">Kosár megnyitása</a></div>
-<div class="flex grow flex-col gap-3 hidden" data-book-pane="venue-hire"><a class="is-tag inline-block rounded-xs bg-white px-5 py-3 text-black" href="collections/all/">Összes termék</a><a class="is-tag inline-block rounded-xs bg-white px-5 py-3 text-black" href="collections/felnott/">Felnőtt</a><a class="is-tag inline-block rounded-xs bg-white px-5 py-3 text-black" href="collections/gyerek/">Gyerek</a></div>
-<div class="flex grow flex-col gap-3 hidden" data-book-pane="functions"><a class="is-tag inline-block rounded-xs bg-white px-5 py-3 text-black" href="blog/">A napló megnyitása</a></div>
+<div class="flex grow flex-col gap-3" data-book-pane="eat-and-drink">
+<div aria-live="polite" class="flex flex-col gap-4" data-cart-preview=""></div>
+@@CART_ACTION@@
+</div>
+<div class="flex grow flex-col gap-3 hidden" data-book-pane="venue-hire">
+<div class="mt-2 flex flex-col gap-8">
+<div class="flex flex-col gap-3">
+<p class="is-technical-scale text-white/70">Korosztály</p>
+<nav aria-label="Korosztály" class="flex flex-wrap items-center gap-4">
+<a class="is-body text-white/70 transition-colors duration-300 hover:text-white" href="collections/felnott/">Felnőtt</a>
+<a class="is-body text-white/70 transition-colors duration-300 hover:text-white" href="collections/gyerek/">Gyerek</a>
+</nav>
+</div>
+@@COLLECTION_ACTION@@
+</div>
+</div>
+<div class="flex grow flex-col gap-3 hidden" data-book-pane="functions">
+<div class="mt-2 flex flex-col gap-8">
+<div class="flex flex-col gap-3">
+<p class="is-technical-scale text-white/70">Legfrissebb cikk</p>
+<a class="is-body flex flex-row items-center gap-2 text-white" href="blog/hatartalan/">Határok nélkül</a>
+</div>
+@@JOURNAL_ACTION@@
+</div>
+</div>
 </div>
 </div>
 </div>

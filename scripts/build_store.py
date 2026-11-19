@@ -48,10 +48,18 @@ def form_button(label, color, *, newsletter=False):
                     extra_class=" mt-4 lg:mt-6" if newsletter else "")
 
 
-def theme_link(label, href, color):
-    return template("theme-action", action_tag="a", action_layout="store-theme-link inline-block max-w-full",
+def theme_link(label, href, color, *, drawer=False):
+    layout = "inline-block min-w-0 w-full" if drawer else "store-theme-link inline-block max-w-full"
+    return template("theme-action", action_tag="a", action_layout=layout,
                     action_attrs=f'href="{escape(href)}"', button_label=escape(label),
-                    face_color=color, extra_class="")
+                    face_color=color, extra_class=" [--tilt:0deg] [--turn:90deg]" if drawer else "")
+
+
+def cart_drawer():
+    return template("cart-drawer",
+                    cart_action=theme_link("Kosár megnyitása", "cart/", "hot-pink", drawer=True),
+                    collection_action=theme_link("Összes termék", "collections/all/", "hot-pink", drawer=True),
+                    journal_action=theme_link("A napló megnyitása", "blog/", "hot-pink", drawer=True))
 
 
 def animated_type(label):
@@ -132,7 +140,7 @@ def write_page(route, title, content, filename="index.html"):
 <a class="skip-link screen-reader-text sr-only" href="#page-content">Ugrás a tartalomhoz</a>
 {template("header")}
 {template("backdrop")}
-{template("cart-drawer")}
+{cart_drawer()}
 {template("icon-burst")}
 <div id="page-frame">
 <main id="page-content" tabindex="-1">{content}</main>
