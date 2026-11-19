@@ -18,7 +18,8 @@ function pageForRoute() {
  if(path==='/cart') return cart(getCart());
  return notFound();
 }
-function render(){track('page_view'); if(location.hash.startsWith('#/products/')) track('product_view'); app.innerHTML=`${header()}<main id="main" tabindex="-1">${pageForRoute()}</main>${footer()}`; document.title='Limitless Essentials — Bazsi'; updateCount(); window.scrollTo(0,0);}
+function syncHomeNavigation(){const isHome = location.hash === '' || location.hash === '#/'; document.body.classList.toggle('is-home', isHome); document.body.classList.toggle('home-at-top', isHome && window.scrollY < 80);}
+function render(){track('page_view'); if(location.hash.startsWith('#/products/')) track('product_view'); app.innerHTML=`${header()}<main id="main" tabindex="-1">${pageForRoute()}</main>${footer()}`; document.title='Limitless Essentials — Bazsi'; updateCount(); window.scrollTo(0,0); syncHomeNavigation();}
 function updateCount(){const count=getCart().reduce((sum,item)=>sum+item.quantity,0); const node=document.querySelector('[data-cart-count]'); if(node) node.textContent=count ? `(${count})` : '';}
 app.addEventListener('click',event=>{
  const toggle=event.target.closest('.menu-toggle');
@@ -33,5 +34,6 @@ app.addEventListener('click',event=>{
 });
 app.addEventListener('input',event=>{if(event.target.id==='query') { if(event.target.value.length===1) track('search_use'); document.querySelector('#search-results').innerHTML=searchResults(event.target.value); }});
 app.addEventListener('submit',event=>{if(event.target.id==='search-form') event.preventDefault();});
+window.addEventListener('scroll', syncHomeNavigation, {passive:true});
 window.addEventListener('hashchange',()=>{document.body.classList.remove('menu-open');render();});
 render();

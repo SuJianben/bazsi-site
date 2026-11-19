@@ -1,0 +1,25 @@
+/* Homepage masthead: a single artboard preserves the reference proportions. */
+.hero{position:relative;min-height:650px;height:100svh;overflow:hidden;background:#101010}
+.hero-artboard{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(56.25vw,1200px);height:min(61vh,650px);display:flex;align-items:center;justify-content:center}
+.hero-heading{width:100%;margin:0;display:flex;flex-direction:column;align-items:center;font-family:var(--display);font-weight:400;line-height:.9;letter-spacing:0;color:#fff;text-align:center}
+.hero-line{position:relative;display:block;white-space:nowrap;line-height:.9}
+.hero-line-one{font-size:clamp(74px,11vw,215px)}
+.hero-line-two{font-size:clamp(74px,11vw,215px)}
+.hero-line-three{font-size:clamp(74px,11vw,215px)}
+.hero-illustration{position:absolute;display:block;width:auto;max-width:none;pointer-events:none;z-index:2;animation:hero-dance 3.8s ease-in-out infinite alternate;transform-origin:center bottom}
+.hero-mouth{height:120%;right:98%;top:50%;transform:translateY(-50%)}
+.hero-birds{height:60%;left:83%;bottom:85%;animation-delay:-1.5s}
+.hero-eye{height:66%;left:0;bottom:0;animation-delay:-.8s}
+.hero-hand{height:95%;left:90%;bottom:-5%;animation-delay:-2s}
+.hero-hive{height:92%;left:50%;bottom:-5%;transform:translateX(-50%);animation-name:hero-hive;animation-delay:-2.5s}
+.hero-side{position:absolute;top:50%;font:24px/1 var(--display);transform:translateY(-50%)}
+.hero-side-left{left:2%}.hero-side-right{right:2%}
+.hero-actions{position:absolute;bottom:16px;left:50%;transform:translateX(-50%);display:flex;width:min(614px,calc(100% - 32px));height:50px}
+.hero-actions a{display:flex;flex:1;align-items:center;justify-content:center;border:1px solid #000;border-radius:2px;background:#fff;color:#111;font-size:12px;font-weight:800;transition:background .2s,transform .2s}
+.hero-actions a:hover{background:#ffe71c;transform:rotate(-2deg)}
+body.home-at-top .quick-nav{visibility:hidden;pointer-events:none}
+@keyframes hero-dance{0%,100%{rotate:-3deg}50%{rotate:3deg}}
+@keyframes hero-hive{0%,100%{rotate:-2deg}50%{rotate:2deg}}
+@media(max-width:750px){.hero{min-height:600px}.hero-artboard{width:78%;height:45vh}.hero-line-one,.hero-line-two,.hero-line-three{font-size:clamp(60px,16vw,110px)}.hero-side{font-size:14px}.hero-side-left{left:3%}.hero-side-right{right:3%}.hero-actions{height:48px}.hero-actions a{font-size:10px}.hero-mouth{height:112%;right:98%}.hero-hand{left:85%}.hero-birds{left:75%}}
+
+@media(min-width:751px){body.is-home .site-header{width:min(32vw,614px);top:20px}body.is-home .header-bar{height:60px;padding:0 24px}}

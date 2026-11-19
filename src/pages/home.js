@@ -1,7 +1,8 @@
 import { products } from '../data/products.js';
 import { productCard } from '../components/layout.js';
+import { hero } from '../components/hero.js';
 export function home() {
-  return `<section class="hero"><div class="hero-edge hero-edge-left">BAZSI</div><div class="hero-title" aria-label="Limitless Essentials"><div>ÉLJ <span class="sticker star">✳</span></div><div>HATÁROK</div><div>NÉLKÜL<span class="sticker bolt">↯</span><span class="sticker smile">☺</span></div></div><div class="hero-edge hero-edge-right">LE</div><div class="hero-actions"><a href="#/collections/all">↳ &nbsp; KOLLEKCIÓ</a><a href="#/about">↳ &nbsp; RÓLUNK</a><a href="#/blog">↳ &nbsp; NAPLÓ</a></div></section>
+  return `${hero()}
   <section class="curved-banner"><div class="banner-inner"><p>BAZSI × LIMITLESS ESSENTIALS</p><h2>VÁLASSZ<br>HATÁROK<br><i>NÉLKÜL.</i></h2><span class="banner-symbol">✳</span></div></section>
   <section class="product-section section-pad"><div class="section-heading"><div><p class="eyebrow">A TE STÍLUSOD. A TE SZABÁLYAID.</p><h2>AZ ÚJ KOLLEKCIÓ</h2></div><a class="text-link" href="#/collections/all">↳ &nbsp; ÖSSZES TERMÉK</a></div><div class="filter-bar"><button class="filter-button active" data-filter="all">ÖSSZES</button><button class="filter-button" data-filter="felnott">FELNŐTT</button><button class="filter-button" data-filter="gyerek">GYEREK</button></div><div class="product-rail" id="product-rail">${products.map(productCard).join('')}</div><div class="rail-controls"><button data-rail="left" aria-label="Előző termékek">←</button><button data-rail="right" aria-label="Következő termékek">→</button></div></section>
   <section class="manifesto"><p>BAZSI × LIMITLESS ESSENTIALS</p><h2>NO LIMITS.<br>JUST YOU.</h2><a class="white-button" href="#/about">↳ &nbsp; A TÖRTÉNETÜNK</a><span>✳</span></section>
