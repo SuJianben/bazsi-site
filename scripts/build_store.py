@@ -79,10 +79,16 @@ def animated_type(label):
     return label[0] + f'<span class="font-heading-special text-[0.9em]">{label[1]}</span>' + label[2:]
 
 
-def card(product, scope, *, in_rail=False, searching=False):
+def card(product, scope, *, in_rail=False, searching=False, collection=None):
     color, pairing, mask_scale, mask_hover, mask_path = card_styles.get(product["id"], card_styles["felnott-pulover"])
     name = escape(product["name"])
     heading = name.replace(" ", " <br>", 1) if in_rail and product["type"] == "PÓLÓ" else name
+    result_attrs = f' data-search-name="{name}"' if searching else ""
+    if collection is not None:
+        group = product["group"]
+        result_attrs = f' data-collection-item="{group}"'
+        if collection not in ("all", group):
+            result_attrs += " hidden"
     return template("card", product_path=f"products/{product['id']}/",
                     product_name=name, product_heading=heading, product_type=product["type"],
                     product_group=groups[product["group"]], product_image=product["image"],
@@ -93,7 +99,7 @@ def card(product, scope, *, in_rail=False, searching=False):
                     rail_spacing=" store-rail-meta" if in_rail else "",
                     card_layout=RAIL_CARD_LAYOUT if in_rail else "min-w-0",
                     button_min="min-w-[250px]" if in_rail else "min-w-0",
-                    result_attrs=f' data-search-name="{name}"' if searching else "")
+                    result_attrs=result_attrs)
 
 
 def demo_rail_slides(items, scope, *, repeats):
@@ -101,10 +107,11 @@ def demo_rail_slides(items, scope, *, repeats):
                    for position, product in enumerate(items * repeats, start=1))
 
 
-def grid(items, scope, *, searching=False, related=False):
+def grid(items, scope, *, searching=False, related=False, collection=None):
     gaps = "gap-6" if related else "gap-4 sm:gap-y-8 lg:gap-x-6 lg:gap-y-12"
-    cards = ''.join(card(item, scope, searching=searching) for item in items)
-    return f'<div class="grid grid-cols-1 {gaps} sm:grid-cols-2 lg:grid-cols-3">{cards}</div>'
+    cards = ''.join(card(item, scope, searching=searching, collection=collection) for item in items)
+    attrs = ' data-collection-results aria-live="polite"' if collection is not None else ""
+    return f'<div class="grid grid-cols-1 {gaps} sm:grid-cols-2 lg:grid-cols-3"{attrs}>{cards}</div>'
 
 
 def collection_filter(current, *, drawer=False):
@@ -112,7 +119,8 @@ def collection_filter(current, *, drawer=False):
     for slug, label in COLLECTION_FILTERS.items():
         selected = ' aria-current="page"' if slug == current else ''
         options.append(f'<a class="store-filter-option is-tag rounded-xs px-3 py-3 text-black transition-colors duration-150" '
-                       f'data-events-filter href="collections/{slug}/#collection-results-{slug}"{selected}>{label}</a>')
+                       f'data-events-filter data-collection-option="{slug}" data-no-swup '
+                       f'href="collections/{slug}/#collection-results-{slug}"{selected}>{label}</a>')
     return template("collection-filter", current_label=COLLECTION_FILTERS[current],
                     width="w-full" if drawer else "w-full sm:w-42",
                     active="" if current == "all" else " data-active", options=''.join(options))
@@ -216,13 +224,13 @@ def main():
     write_page("", "Bazsi", home)
     write_page("collections", "Sorozatok", banner("Sorozatok") + template("tiles", tile_scope="collections"))
     for slug, title in [("all", "Összes termék"), ("felnott", "Felnőtt kollekció"), ("gyerek", "Gyerek kollekció")]:
-        items = [item for item in products if slug == "all" or item["group"] == slug]
         filters = ('<nav aria-label="Korosztály" class="grid w-full grid-cols-2 items-center gap-1 sm:flex sm:flex-wrap" '
                    'data-events-filters-inline>' + collection_filter(slug) + '</nav>')
         drawer = template("collection-filter-drawer", scope=slug, filter=collection_filter(slug, drawer=True))
-        listing = (f'<section class="overflow-hidden pt-10! text-white lg:pt-16!" data-events-archive id="collection-results-{slug}">'
+        listing = (f'<section class="overflow-hidden pt-10! text-white lg:pt-16!" data-events-archive '
+                   f'data-collection-archive="{slug}" id="collection-results-{slug}">'
                    '<div class="container flex flex-col gap-8 lg:gap-14">'
-                   + filters + grid(items, f"collection-{slug}") + '</div>' + drawer + '</section>')
+                   + filters + grid(products, f"collection-{slug}", collection=slug) + '</div>' + drawer + '</section>')
         write_page(f"collections/{slug}", title, banner(title) + listing)
     for product in products:
         sizes = ''.join(f'<option class="bg-white text-black" value="{size}">{size}</option>' for size in product["sizes"])

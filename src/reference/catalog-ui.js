@@ -1,20 +1,8 @@
 import { track } from '../analytics/events.js?v=2';
+import { replaceViewUrl } from './view-url.js';
 
 const searchForm = '[data-search-form]';
-const openFilter = '[data-collection-filter][open]';
 const normalize = value => value.toLocaleLowerCase('hu').normalize('NFD').replace(/\p{Diacritic}/gu, '');
-
-document.addEventListener('swup:visit:end', () => {
-  if (!location.hash.startsWith('#collection-results-')) return;
-  const target = document.getElementById(location.hash.slice(1));
-  if (!target) return;
-  const top = target.getBoundingClientRect().top;
-  const offset = parseFloat(getComputedStyle(target).scrollMarginTop);
-  // Swup's incoming frame is fixed while its page animation is running.
-  if (Math.abs(top - offset) > 1) {
-    window.app.smoothScroll.lenis.scrollTo(window.scrollY + top - offset, { immediate: true, force: true });
-  }
-});
 
 function updateResults(form) {
   const value = form.elements.q.value.trim();
@@ -47,13 +35,7 @@ function saveAndUpdate(form) {
   const value = form.elements.q.value.trim();
   if (value) url.searchParams.set('q', value);
   else url.searchParams.delete('q');
-  if (url.href !== location.href) {
-    const state = history.state;
-    // Swup reads its saved URL when restoring this entry with Back or Forward.
-    const path = `${url.pathname}${url.search}${url.hash}`;
-    const next = state?.source === 'swup' ? { ...state, url: path } : state;
-    history.replaceState(next, '', url);
-  }
+  replaceViewUrl(url);
   updateResults(form);
 }
 
@@ -76,30 +58,3 @@ document.addEventListener('reset', event => {
   saveAndUpdate(form);
   form.elements.q.focus();
 });
-
-document.addEventListener('click', event => {
-  const link = event.target.closest('a');
-  for (const filter of document.querySelectorAll(openFilter)) {
-    if (link && filter.contains(link)) {
-      if (link.getAttribute('aria-current') === 'page') {
-        event.preventDefault();
-        if (!filter.closest('[data-events-filter-sheet]')) filter.querySelector('summary').focus();
-      } else {
-        track('collection_filter');
-      }
-      filter.open = false;
-    } else if (!filter.contains(event.target)) {
-      filter.open = false;
-    }
-  }
-}, { capture: true });
-
-document.addEventListener('keydown', event => {
-  if (event.key !== 'Escape') return;
-  const filter = event.target.closest(openFilter)
-    ?? document.querySelector(`[data-events-filter-open][aria-expanded="true"] ~ * ${openFilter}`);
-  if (!filter) return;
-  event.stopImmediatePropagation();
-  filter.open = false;
-  filter.querySelector('summary').focus();
-}, { capture: true });

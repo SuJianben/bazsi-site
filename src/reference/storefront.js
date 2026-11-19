@@ -1,6 +1,7 @@
 import { productById } from '../data/products.js';
 import { track } from '../analytics/events.js?v=2';
-import { mountSearch } from './catalog-ui.js?v=4';
+import { mountSearch } from './catalog-ui.js?v=5';
+import { mountCollection } from './collection-filter.js?v=1';
 import { renderCart } from './cart-ui.js?v=1';
 import { enableNewsletterPreview } from './newsletter-preview.js?v=1';
 import './home-film-motion.js?v=2';
@@ -38,6 +39,7 @@ function mountPage() {
   if (frame?.querySelector('[data-product-form]')) track('product_view');
   enableNewsletterPreview(frame);
   mountSearch(frame);
+  mountCollection(frame);
   renderCart();
 }
 

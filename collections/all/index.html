@@ -10,8 +10,8 @@
 <base href="../../">
 <script>const storeRoot = new URL("../../", location.href);document.querySelector("base").href = storeRoot.href;</script>
 <link rel="stylesheet" href="assets/reference/theme.css">
-<link rel="stylesheet" href="src/reference/storefront.css?v=76e4b815e078">
-<script type="module" src="src/reference/storefront.js?v=1c3ed3004602"></script>
+<link rel="stylesheet" href="src/reference/storefront.css?v=98faff021c80">
+<script type="module" src="src/reference/storefront.js?v=51669d990df1"></script>
 <script defer src="assets/reference/theme.js"></script>
 </head>
 <body class="min-h-screen">
@@ -438,14 +438,14 @@
 </div>
 </div>
 </section>
-<section class="overflow-hidden pt-10! text-white lg:pt-16!" data-events-archive id="collection-results-all"><div class="container flex flex-col gap-8 lg:gap-14"><nav aria-label="Korosztály" class="grid w-full grid-cols-2 items-center gap-1 sm:flex sm:flex-wrap" data-events-filters-inline><details class="store-collection-filter group relative w-full sm:w-42" data-collection-filter>
+<section class="overflow-hidden pt-10! text-white lg:pt-16!" data-events-archive data-collection-archive="all" id="collection-results-all"><div class="container flex flex-col gap-8 lg:gap-14"><nav aria-label="Korosztály" class="grid w-full grid-cols-2 items-center gap-1 sm:flex sm:flex-wrap" data-events-filters-inline><details class="store-collection-filter group relative w-full sm:w-42" data-collection-filter>
 <summary class="is-tag flex w-full cursor-pointer flex-row items-center justify-between gap-4 rounded-xs border-[1.5px] border-white bg-white py-3 pr-5 pl-6 text-black outline-1 outline-light-black transition-all duration-150 ease-out hover:border-light-black focus:border-light-black focus:opacity-100! hover:outline-real-teal focus:outline-real-teal group-data-[active]:border-real-teal group-data-[active]:bg-real-teal">
-<span class="truncate">Összes termék</span>
+<span class="truncate" data-collection-label>Összes termék</span>
 <svg aria-hidden="true" class="w-[0.4em] shrink-0 rotate-90 transition-transform duration-200 ease-fancy" viewBox="0 0 8 13" fill="none"><path d="M1.073 1.073L6.384 6.384L1.073 11.695" stroke="currentColor" stroke-linecap="square" stroke-linejoin="round" stroke-width="2"></path></svg>
 </summary>
-<div class="absolute top-[calc(100%+0.25em)] left-0 z-20 flex max-h-72 w-full flex-col gap-0.5 overflow-y-auto rounded-sm bg-real-teal p-0.5"><a class="store-filter-option is-tag rounded-xs px-3 py-3 text-black transition-colors duration-150" data-events-filter href="collections/all/#collection-results-all" aria-current="page">Összes termék</a><a class="store-filter-option is-tag rounded-xs px-3 py-3 text-black transition-colors duration-150" data-events-filter href="collections/felnott/#collection-results-felnott">Felnőtt</a><a class="store-filter-option is-tag rounded-xs px-3 py-3 text-black transition-colors duration-150" data-events-filter href="collections/gyerek/#collection-results-gyerek">Gyerek</a></div>
+<div class="absolute top-[calc(100%+0.25em)] left-0 z-20 flex max-h-72 w-full flex-col gap-0.5 overflow-y-auto rounded-sm bg-real-teal p-0.5"><a class="store-filter-option is-tag rounded-xs px-3 py-3 text-black transition-colors duration-150" data-events-filter data-collection-option="all" data-no-swup href="collections/all/#collection-results-all" aria-current="page">Összes termék</a><a class="store-filter-option is-tag rounded-xs px-3 py-3 text-black transition-colors duration-150" data-events-filter data-collection-option="felnott" data-no-swup href="collections/felnott/#collection-results-felnott">Felnőtt</a><a class="store-filter-option is-tag rounded-xs px-3 py-3 text-black transition-colors duration-150" data-events-filter data-collection-option="gyerek" data-no-swup href="collections/gyerek/#collection-results-gyerek">Gyerek</a></div>
 </details>
-</nav><div class="grid grid-cols-1 gap-4 sm:gap-y-8 lg:gap-x-6 lg:gap-y-12 sm:grid-cols-2 lg:grid-cols-3"><div class="min-w-0">
+</nav><div class="grid grid-cols-1 gap-4 sm:gap-y-8 lg:gap-x-6 lg:gap-y-12 sm:grid-cols-2 lg:grid-cols-3" data-collection-results aria-live="polite"><div class="min-w-0" data-collection-item="felnott">
 <div class="group/tease relative h-full w-full overflow-hidden rounded-xl bg-white/10 p-[1.5px] text-white will-change-transform select-none" data-p="">
 <article class="relative flex h-full w-full flex-col gap-4 rounded-[11px] bg-light-black p-4">
 <a aria-label="Felnőtt kapucnis pulóver" class="[container-type:inline-size] relative aspect-square w-full overflow-hidden rounded-xs bg-hot-pink" href="products/felnott-pulover/">
@@ -532,7 +532,7 @@
 </article>
 </div>
 </div>
-<div class="min-w-0">
+<div class="min-w-0" data-collection-item="gyerek">
 <div class="group/tease relative h-full w-full overflow-hidden rounded-xl bg-white/10 p-[1.5px] text-white will-change-transform select-none" data-p="">
 <article class="relative flex h-full w-full flex-col gap-4 rounded-[11px] bg-light-black p-4">
 <a aria-label="Gyerek kapucnis pulóver" class="[container-type:inline-size] relative aspect-square w-full overflow-hidden rounded-xs bg-light-purple" href="products/gyerek-pulover/">
@@ -619,7 +619,7 @@
 </article>
 </div>
 </div>
-<div class="min-w-0">
+<div class="min-w-0" data-collection-item="felnott">
 <div class="group/tease relative h-full w-full overflow-hidden rounded-xl bg-white/10 p-[1.5px] text-white will-change-transform select-none" data-p="">
 <article class="relative flex h-full w-full flex-col gap-4 rounded-[11px] bg-light-black p-4">
 <a aria-label="Felnőtt póló" class="[container-type:inline-size] relative aspect-square w-full overflow-hidden rounded-xs bg-blue-skies" href="products/felnott-polo/">
@@ -706,7 +706,7 @@
 </article>
 </div>
 </div>
-<div class="min-w-0">
+<div class="min-w-0" data-collection-item="gyerek">
 <div class="group/tease relative h-full w-full overflow-hidden rounded-xl bg-white/10 p-[1.5px] text-white will-change-transform select-none" data-p="">
 <article class="relative flex h-full w-full flex-col gap-4 rounded-[11px] bg-light-black p-4">
 <a aria-label="Gyerek póló" class="[container-type:inline-size] relative aspect-square w-full overflow-hidden rounded-xs bg-red-hot" href="products/gyerek-polo/">
@@ -817,10 +817,10 @@ Szűrők
 <div aria-labelledby="collection-filter-label-all" class="flex flex-col gap-2" role="group">
 <details class="store-collection-filter group relative w-full" data-collection-filter>
 <summary class="is-tag flex w-full cursor-pointer flex-row items-center justify-between gap-4 rounded-xs border-[1.5px] border-white bg-white py-3 pr-5 pl-6 text-black outline-1 outline-light-black transition-all duration-150 ease-out hover:border-light-black focus:border-light-black focus:opacity-100! hover:outline-real-teal focus:outline-real-teal group-data-[active]:border-real-teal group-data-[active]:bg-real-teal">
-<span class="truncate">Összes termék</span>
+<span class="truncate" data-collection-label>Összes termék</span>
 <svg aria-hidden="true" class="w-[0.4em] shrink-0 rotate-90 transition-transform duration-200 ease-fancy" viewBox="0 0 8 13" fill="none"><path d="M1.073 1.073L6.384 6.384L1.073 11.695" stroke="currentColor" stroke-linecap="square" stroke-linejoin="round" stroke-width="2"></path></svg>
 </summary>
-<div class="absolute top-[calc(100%+0.25em)] left-0 z-20 flex max-h-72 w-full flex-col gap-0.5 overflow-y-auto rounded-sm bg-real-teal p-0.5"><a class="store-filter-option is-tag rounded-xs px-3 py-3 text-black transition-colors duration-150" data-events-filter href="collections/all/#collection-results-all" aria-current="page">Összes termék</a><a class="store-filter-option is-tag rounded-xs px-3 py-3 text-black transition-colors duration-150" data-events-filter href="collections/felnott/#collection-results-felnott">Felnőtt</a><a class="store-filter-option is-tag rounded-xs px-3 py-3 text-black transition-colors duration-150" data-events-filter href="collections/gyerek/#collection-results-gyerek">Gyerek</a></div>
+<div class="absolute top-[calc(100%+0.25em)] left-0 z-20 flex max-h-72 w-full flex-col gap-0.5 overflow-y-auto rounded-sm bg-real-teal p-0.5"><a class="store-filter-option is-tag rounded-xs px-3 py-3 text-black transition-colors duration-150" data-events-filter data-collection-option="all" data-no-swup href="collections/all/#collection-results-all" aria-current="page">Összes termék</a><a class="store-filter-option is-tag rounded-xs px-3 py-3 text-black transition-colors duration-150" data-events-filter data-collection-option="felnott" data-no-swup href="collections/felnott/#collection-results-felnott">Felnőtt</a><a class="store-filter-option is-tag rounded-xs px-3 py-3 text-black transition-colors duration-150" data-events-filter data-collection-option="gyerek" data-no-swup href="collections/gyerek/#collection-results-gyerek">Gyerek</a></div>
 </details>
 
 </div>

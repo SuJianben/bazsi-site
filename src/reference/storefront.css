@@ -39,6 +39,10 @@
   scroll-margin-top: 7rem;
 }
 
+#page-frame:has([data-collection-results][aria-busy="true"]) {
+  overflow-anchor: none;
+}
+
 .store-filter-option:is(:hover, :focus-visible, [aria-current="page"]) {
   background: var(--color-light-black);
   color: white;
