@@ -10,8 +10,8 @@
 <base href="../">
 <script>const storeRoot = new URL("../", location.href);document.querySelector("base").href = storeRoot.href;</script>
 <link rel="stylesheet" href="assets/reference/theme.css">
-<link rel="stylesheet" href="src/reference/storefront.css">
-<script type="module" src="src/reference/storefront.js?v=9cdc30fab534"></script>
+<link rel="stylesheet" href="src/reference/storefront.css?v=57695102f849">
+<script type="module" src="src/reference/storefront.js?v=9d9c4e4359ad"></script>
 <script defer src="assets/reference/theme.js"></script>
 </head>
 <body class="min-h-screen">
@@ -24,10 +24,13 @@
 <div class="h-[2px] w-8 bg-white" data-menu-bar=""></div>
 <div class="h-[2px] w-8 bg-white" data-menu-bar=""></div>
 </button>
-<a aria-label="Limitless Essentials – főoldal" class="transition-all duration-300 ease-in-out active:scale-95" href="./" rel="home">
-<svg aria-hidden="true" class="h-4 sm:h-5.5 w-auto" viewbox="0 0 350 70" xmlns="http://www.w3.org/2000/svg"><text fill="currentColor" font-family="Founders Grotesk Medium, sans-serif" font-size="49" font-weight="bold" lengthadjust="spacingAndGlyphs" text-anchor="middle" textlength="300" x="175" y="40">LIMITLESS</text><text fill="currentColor" font-family="Gosha Sans, sans-serif" font-size="19" lengthadjust="spacing" text-anchor="middle" textlength="246" x="175" y="63">ESSENTIALS</text></svg>
+<a aria-label="Limitless Essentials – főoldal" class="min-w-0 transition-all duration-300 ease-in-out active:scale-95" href="./" rel="home">
+<svg aria-hidden="true" class="h-4 max-w-full sm:h-5.5" viewBox="0 0 243 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
+<text x="1" y="19" textLength="129" lengthAdjust="spacingAndGlyphs" font-family="Founders Grotesk Medium, sans-serif" font-size="25" font-weight="bold">LIMITLESS</text>
+<text x="136" y="19" textLength="106" lengthAdjust="spacing" font-family="Gosha Sans, sans-serif" font-size="15">ESSENTIALS</text>
+</svg>
 </a>
-<a aria-label="Kosár" href="cart/" rel="home">
+<a aria-label="Kosár" class="shrink-0" href="cart/" rel="home">
 <svg class="h-5.5 w-8" fill="none" viewbox="0 0 26 25" xmlns="http://www.w3.org/2000/svg">
 <path d="M0 24.796H25.8167L12.9083 0L0 24.796ZM12.9083 7.14967L14.3326 16.882C13.8721 16.7918 13.3926 16.7395 12.9083 16.7395C12.4241 16.7395 11.9446 16.7918 11.4841 16.882L12.9083 7.14967ZM10.2023 17.257C9.44269 17.5561 8.74482 17.9691 8.12765 18.4819L11.6645 7.25887L10.2023 17.2523V17.257ZM1.99393 23.5854L10.245 7.73361L5.24594 23.5854H1.99393ZM6.69866 23.5854C7.0025 20.4283 9.67057 17.9501 12.9083 17.9501C16.1461 17.9501 18.8142 20.4283 19.118 23.5854H6.69866ZM23.818 23.5854H20.566L15.5669 7.73836L23.818 23.5854ZM17.6843 18.4819C17.0719 17.9644 16.3692 17.5514 15.6096 17.257L14.1474 7.26362L17.6843 18.4866V18.4819Z" fill="currentColor"></path>
 </svg>

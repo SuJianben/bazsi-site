@@ -2,7 +2,7 @@ import { addItem, getCart, removeItem } from '../app/cart.js';
 import { productById } from '../data/products.js';
 import { track } from '../analytics/events.js?v=2';
 import { enableNewsletterPreview } from './newsletter-preview.js?v=1';
-import './home-film-motion.js';
+import './home-film-motion.js?v=2';
 
 const normalize = value => value.toLocaleLowerCase('hu').normalize('NFD').replace(/\p{Diacritic}/gu, '');
 const asset = path => new URL(path, document.baseURI).href;

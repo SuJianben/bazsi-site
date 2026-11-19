@@ -10,6 +10,8 @@ ROOT = Path(__file__).resolve().parents[1]
 TEMPLATES = ROOT / "src/reference/templates"
 STOREFRONT_SCRIPT = "src/reference/storefront.js"
 SCRIPT_VERSION = sha256((ROOT / STOREFRONT_SCRIPT).read_bytes()).hexdigest()[:12]
+STOREFRONT_STYLE = "src/reference/storefront.css"
+STYLE_VERSION = sha256((ROOT / STOREFRONT_STYLE).read_bytes()).hexdigest()[:12]
 products = json.loads(subprocess.check_output([
     "node", "--input-type=module", "-e",
     "import {products} from './src/data/products.js'; console.log(JSON.stringify(products));",
@@ -57,7 +59,7 @@ def card(product, scope, *, in_rail=False):
                     product_sizes=" / ".join(product["sizes"]), card_color=color,
                     card_pairing=pairing, mask_path=mask_path, mask_scale=mask_scale,
                     mask_hover=mask_hover, mask_id=f"card-{scope}-{product['id']}",
-                    rail_spacing=" pb-5" if in_rail else "")
+                    rail_spacing=" store-rail-meta" if in_rail else "")
 
 
 def demo_rail_slides(items, scope, *, repeats):
@@ -102,7 +104,7 @@ def write_page(route, title, content, filename="index.html"):
 <base href="{prefix}">
 <script>{initial}</script>
 <link rel="stylesheet" href="assets/reference/theme.css">
-<link rel="stylesheet" href="src/reference/storefront.css">
+<link rel="stylesheet" href="{STOREFRONT_STYLE}?v={STYLE_VERSION}">
 <script type="module" src="{STOREFRONT_SCRIPT}?v={SCRIPT_VERSION}"></script>
 <script defer src="assets/reference/theme.js"></script>
 </head>
@@ -143,9 +145,16 @@ def detail(title, image, tag, body, aside):
 
 def main():
     spaces = {}
+    tee_notes = {
+        "felnott-polo": "Fekete póló a mindennapokra, apró Limitless Essentials emblémával.",
+        "gyerek-polo": "Egy mindennapi alapdarab gyerekeknek. A fekete póló mellkasán, bal oldalt apró Limitless Essentials embléma látható.",
+    }
     for i, product in enumerate(products):
+        label = f'{groups[product["group"]]} {product["type"].lower()}'
+        note = escape(tee_notes.get(product["id"], product["description"]))
         spaces.update({f"space_image_{i}": product["image"],
                        f"space_name_{i}": escape(product["name"]),
+                       f"space_label_{i}": escape(label), f"space_note_{i}": note,
                        f"space_path_{i}": f"products/{product['id']}/"})
     wordmark = template("wordmark-paths")
     about = template("home-about", wordmark=wordmark, crest_id="home-brand-crest")

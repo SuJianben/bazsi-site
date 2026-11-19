@@ -10,6 +10,7 @@ function configureWordmark() {
   if (!trigger) return;
 
   controller.dances?.forEach(tween => tween.revert());
+  controller.dances = [];
   trigger.vars.end = 'top 55%';
   trigger.refresh();
   configured.add(wordmark);

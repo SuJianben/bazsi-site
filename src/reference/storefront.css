@@ -21,3 +21,8 @@
 [data-search-form] .store-field:focus {
   outline-color: white;
 }
+
+.store-rail-meta {
+  /* Reserve the original slider's third metadata row and its preceding gap. */
+  padding-block-end: calc(max(14px, 0.75vw) + 2 * var(--spacing));
+}
