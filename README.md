@@ -1,25 +1,19 @@
 # Limitless Essentials Demo
 
-匈牙利语品牌店铺前端演示，使用浏览器原生模块，无需安装依赖。商品和图片仅用于展示；不含结账或 Shopify 接入。
+这是匈牙利语服装店 Demo，使用 The Rechabite 的公开前端模板、样式、字体和动画代码。票务、预约和场地内容已换成 Bazsi 的商品、系列、品牌和购物车。项目为静态前端，不处理结账和 Shopify 数据。
 
-## 本地运行
+## 预览和构建
 
-在项目目录运行 `python -m http.server 4173`，然后打开 http://localhost:4173/ 。
+- 在项目根目录运行 `python scripts/serve_store.py` 后，打开 [本地首页](http://localhost:4173/)。
+- 修改商品或模板后运行 `python scripts/build_store.py`。构建使用 Python 和 Node.js 22，生成的静态页面可直接预览。
+- 商品和页面链接使用独立路径。原先带 `#/` 的 Demo 链接会转到对应页面。
 
-## 结构
+## 文件职责
 
-- `src/app`：入口、路由装配和浏览器本地购物车。
-- `src/analytics`：仅当前浏览器会话中的匿名事件计数，不发送到外部。
-- `src/components`：导航、页脚和商品卡片。
-- `src/data`：演示商品资料。
-- `src/pages`：首页和店铺页面。
-- `src/styles`：基础、首页、内页样式。
-- `assets`：商品演示图片。
+- `src/reference/templates` 存放按区块拆分的模板。脚本根据商品数据生成首页、系列、详情、博客、品牌、搜索、购物车和 404。
+- `assets/reference` 存放参考站主题资源。脚本包保持原样，样式表的字体地址指向本地文件。
+- `src/reference/storefront.js` 负责商品搜索、本地购物车、菜单无障碍状态和本地事件记录。动画、滚动、悬停和页面过场由原站前端脚本处理。
+- `src/data/products.js` 存放四款演示商品。商品图片和由它们生成的首页视频在 `assets`。
+- `src/analytics/events.js` 在当前浏览器会话中记录匿名计数。购物车通过浏览器本地存储保存。
 
-购物车只保存在当前浏览器中，不连接支付或服务器。商品资料和素材需要在正式上线前确认。
-
-首屏目前使用来自 The Rechabite（https://therechabite.com.au/）的矢量插画，仅用于对照演示；正式上线前须确认授权或替换为自有素材。
-
-## 参考代码与依赖
-
-导航控制器根据 The Rechabite 公共网站代码移植，保留 GSAP 动画时间轴、面板高度动画和折叠分组逻辑；已移除原站的平滑滚动和其他页面依赖。按钮沿用参考站的双面 3D 翻转结构。`src/vendor/gsap.min.js` 是 GSAP 3.15.0，文件头包含许可信息。原站代码与素材在正式发布前须确认使用权。
+参考站为 [The Rechabite](https://therechabite.com.au/)。其第三方包的许可说明保留在原脚本头尾。当前版本使用原站公开前端资源，不依赖原站 WordPress、票务、预约或营销服务。

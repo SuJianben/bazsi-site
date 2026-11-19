@@ -1,0 +1,78 @@
+<div data-block="events">
+<section class="-mt-px overflow-hidden text-white" data-events="">
+<div class="container flex flex-col gap-8">
+<div class="flex flex-col justify-between gap-6 md:flex-row md:items-end">
+<div class="flex flex-col gap-5">
+<div class="block-content">
+<h2 class="is-section-label">A kollekció</h2>
+</div>
+<div class="flex w-fit flex-row items-center gap-1.5 rounded-md bg-white/10 p-1.5" role="tablist">
+<button aria-selected="true" class="is-technical-scale rounded-xs px-8 py-6 transition-all duration-150 ease-in-out [&amp;.active]:bg-white [&amp;.active]:text-black active" data-events-tab="whats-on" role="tab" type="button">Összes</button>
+<button aria-selected="false" class="is-technical-scale rounded-xs px-8 py-6 transition-all duration-150 ease-in-out [&amp;.active]:bg-white [&amp;.active]:text-black" data-events-tab="always-on" role="tab" type="button">Gyerek</button>
+</div>
+</div>
+<div class="flex flex-row items-center gap-4">
+<a class="max-sm:hidden is-technical-scale group flex flex-row items-center gap-3 text-white" href="@@ROOT@@collections/all/" target="_self">
+<span class="relative -mb-px block size-[max(14px,0.75vw)] shrink-0 overflow-hidden">
+<svg class="absolute inset-0 size-full transition-transform duration-400 ease-fancy group-hover:translate-x-[150%] motion-reduce:transition-none" fill="none" viewbox="0 0 15 12" xmlns="http://www.w3.org/2000/svg">
+<path d="M14.7099 6.73637C14.9651 6.48114 14.9651 6.06732 14.7099 5.81209L10.5506 1.65282C10.2954 1.39759 9.88156 1.39759 9.62632 1.65282C9.37109 1.90806 9.37109 2.32187 9.62632 2.5771L13.3234 6.27423L9.62632 9.97136C9.37109 10.2266 9.37109 10.6404 9.62632 10.8956C9.88156 11.1509 10.2954 11.1509 10.5506 10.8956L14.7099 6.73637ZM0.653564 6.27423L-1.13246e-06 6.27423L-1.13245e-06 6.9278L0.653564 6.9278L0.653564 6.27423ZM14.2477 6.27423L14.2477 5.62066L0.653564 5.62066L0.653564 6.27423L0.653564 6.9278L14.2477 6.9278L14.2477 6.27423ZM0.653564 6.27423L1.30713 6.27423L1.30713 0L0.653564 0L-1.13249e-06 0L-1.13246e-06 6.27423L0.653564 6.27423Z" fill="currentColor"></path>
+</svg>
+<svg class="absolute inset-0 size-full -translate-x-[150%] transition-transform duration-400 ease-fancy group-hover:translate-x-0 motion-reduce:transition-none" fill="none" viewbox="0 0 15 12" xmlns="http://www.w3.org/2000/svg">
+<path d="M14.7099 6.73637C14.9651 6.48114 14.9651 6.06732 14.7099 5.81209L10.5506 1.65282C10.2954 1.39759 9.88156 1.39759 9.62632 1.65282C9.37109 1.90806 9.37109 2.32187 9.62632 2.5771L13.3234 6.27423L9.62632 9.97136C9.37109 10.2266 9.37109 10.6404 9.62632 10.8956C9.88156 11.1509 10.2954 11.1509 10.5506 10.8956L14.7099 6.73637ZM0.653564 6.27423L-1.13246e-06 6.27423L-1.13245e-06 6.9278L0.653564 6.9278L0.653564 6.27423ZM14.2477 6.27423L14.2477 5.62066L0.653564 5.62066L0.653564 6.27423L0.653564 6.9278L14.2477 6.9278L14.2477 6.27423ZM0.653564 6.27423L1.30713 6.27423L1.30713 0L0.653564 0L-1.13249e-06 0L-1.13246e-06 6.27423L0.653564 6.27423Z" fill="currentColor"></path>
+</svg>
+</span>
+<span class="relative flex flex-col leading-none">
+<span class="relative flex overflow-hidden">
+<span class="flex w-full transition-transform delay-75 duration-400 ease-fancy group-hover:-translate-y-full motion-reduce:transition-none">
+				Kollekció
+			</span>
+<span class="absolute inset-0 flex w-full translate-y-full transition-transform delay-75 duration-400 ease-fancy group-hover:translate-y-0 motion-reduce:transition-none">
+				Kollekció
+			</span>
+</span>
+<span class="mt-[0.35em] h-px w-full origin-left scale-x-0 bg-current transition-transform delay-100 duration-300 ease-fancy group-hover:scale-x-100 motion-reduce:transition-none"></span>
+</span>
+</a>
+</div>
+</div>
+<div class="" data-events-panel="whats-on">
+<div class="flex" data-event-slider="">@@ALL_SLIDES@@</div>
+</div>
+<div class="hidden" data-events-panel="always-on">
+<div class="flex" data-event-slider="">@@KIDS_SLIDES@@</div>
+</div>
+<div class="flex flex-row justify-end">
+<div class="flex flex-row items-center gap-1.5" data-slider-nav="">
+<button aria-label="Előző termékek" class="relative inline-block [transform:rotate(calc(var(--dir)*var(--tilt)*var(--on,0)))] transition-[transform,opacity] duration-300 ease-fancy [--face:2.5rem] [--tilt:-4deg] [--turn:80deg] [perspective:700px] hover:z-10 enabled:hover:[--on:1] enabled:active:[--on:1] disabled:cursor-not-allowed disabled:opacity-50 [--dir:-1]" data-slider-prev="" type="button">
+<span class="relative block h-[var(--face)] [transform:translateZ(calc(var(--face)/-2))_rotateX(calc(var(--dir)*var(--turn)*var(--on,0)))] transition-transform duration-300 ease-fancy [transform-style:preserve-3d]">
+<span class="relative [transform:translateZ(calc(var(--face)/2))] text-white flex h-full items-center justify-center rounded border-[1.5px] border-white px-6 backface-hidden">
+<svg class="size-[max(14px,0.75vw)]" fill="none" viewbox="0 0 12 11" xmlns="http://www.w3.org/2000/svg">
+<path d="M0.19912 5.48617C-0.0663376 5.22071 -0.0663376 4.79032 0.19912 4.52486L4.52501 0.198976C4.79047 -0.0664821 5.22086 -0.0664821 5.48632 0.198976C5.75177 0.464434 5.75177 0.894826 5.48632 1.16028L1.64108 5.00552L5.48632 8.85075C5.75177 9.11621 5.75177 9.5466 5.48632 9.81206C5.22086 10.0775 4.79047 10.0775 4.52501 9.81206L0.19912 5.48617ZM10.3899 5.00552H11.0696V5.68527H10.3899V5.00552ZM0.679774 5.00552V4.32577H10.3899V5.00552V5.68527H0.679774V5.00552ZM10.3899 5.00552H9.71014V0.523926H10.3899H11.0696V5.00552H10.3899Z" fill="currentColor"></path>
+</svg>
+</span>
+<span class="absolute inset-0 transform-[rotateX(calc(var(--dir)*-90deg))_translateZ(calc(var(--face)/2))] bg-white text-black flex h-full items-center justify-center rounded border-[1.5px] border-white px-6 backface-hidden">
+<svg class="size-[max(14px,0.75vw)]" fill="none" viewbox="0 0 12 11" xmlns="http://www.w3.org/2000/svg">
+<path d="M0.19912 5.48617C-0.0663376 5.22071 -0.0663376 4.79032 0.19912 4.52486L4.52501 0.198976C4.79047 -0.0664821 5.22086 -0.0664821 5.48632 0.198976C5.75177 0.464434 5.75177 0.894826 5.48632 1.16028L1.64108 5.00552L5.48632 8.85075C5.75177 9.11621 5.75177 9.5466 5.48632 9.81206C5.22086 10.0775 4.79047 10.0775 4.52501 9.81206L0.19912 5.48617ZM10.3899 5.00552H11.0696V5.68527H10.3899V5.00552ZM0.679774 5.00552V4.32577H10.3899V5.00552V5.68527H0.679774V5.00552ZM10.3899 5.00552H9.71014V0.523926H10.3899H11.0696V5.00552H10.3899Z" fill="currentColor"></path>
+</svg>
+</span>
+</span>
+</button>
+<button aria-label="Következő termékek" class="relative inline-block [transform:rotate(calc(var(--dir)*var(--tilt)*var(--on,0)))] transition-[transform,opacity] duration-300 ease-fancy [--face:2.5rem] [--tilt:-4deg] [--turn:80deg] [perspective:700px] hover:z-10 enabled:hover:[--on:1] enabled:active:[--on:1] disabled:cursor-not-allowed disabled:opacity-50 [--dir:1]" data-slider-next="" type="button">
+<span class="relative block h-[var(--face)] [transform:translateZ(calc(var(--face)/-2))_rotateX(calc(var(--dir)*var(--turn)*var(--on,0)))] transition-transform duration-300 ease-fancy [transform-style:preserve-3d]">
+<span class="relative [transform:translateZ(calc(var(--face)/2))] text-white flex h-full items-center justify-center rounded border-[1.5px] border-white px-6 backface-hidden">
+<svg class="size-[max(14px,0.75vw)]" fill="none" viewbox="0 0 12 11" xmlns="http://www.w3.org/2000/svg">
+<path d="M10.8705 5.48617C11.1359 5.22071 11.1359 4.79032 10.8705 4.52486L6.54457 0.198976C6.27911 -0.0664821 5.84872 -0.0664821 5.58326 0.198976C5.31781 0.464434 5.31781 0.894826 5.58326 1.16028L9.4285 5.00552L5.58326 8.85075C5.31781 9.11621 5.31781 9.5466 5.58326 9.81206C5.84872 10.0775 6.27911 10.0775 6.54457 9.81206L10.8705 5.48617ZM0.679688 5.00552H-6.02603e-05V5.68527H0.679688V5.00552ZM10.3898 5.00552V4.32577H0.679688V5.00552V5.68527H10.3898V5.00552ZM0.679688 5.00552H1.35944V0.523926H0.679688H-6.02603e-05V5.00552H0.679688Z" fill="currentColor"></path>
+</svg>
+</span>
+<span class="absolute inset-0 transform-[rotateX(calc(var(--dir)*-90deg))_translateZ(calc(var(--face)/2))] bg-white text-black flex h-full items-center justify-center rounded border-[1.5px] border-white px-6 backface-hidden">
+<svg class="size-[max(14px,0.75vw)]" fill="none" viewbox="0 0 12 11" xmlns="http://www.w3.org/2000/svg">
+<path d="M10.8705 5.48617C11.1359 5.22071 11.1359 4.79032 10.8705 4.52486L6.54457 0.198976C6.27911 -0.0664821 5.84872 -0.0664821 5.58326 0.198976C5.31781 0.464434 5.31781 0.894826 5.58326 1.16028L9.4285 5.00552L5.58326 8.85075C5.31781 9.11621 5.31781 9.5466 5.58326 9.81206C5.84872 10.0775 6.27911 10.0775 6.54457 9.81206L10.8705 5.48617ZM0.679688 5.00552H-6.02603e-05V5.68527H0.679688V5.00552ZM10.3898 5.00552V4.32577H0.679688V5.00552V5.68527H10.3898V5.00552ZM0.679688 5.00552H1.35944V0.523926H0.679688H-6.02603e-05V5.00552H0.679688Z" fill="currentColor"></path>
+</svg>
+</span>
+</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+</div>

@@ -1,0 +1,31 @@
+<div class="pointer-events-none fixed inset-0 z-60 hidden" data-book="">
+<div class="pointer-events-auto absolute inset-0 bg-black/50 opacity-0" data-book-scrim=""></div>
+<div aria-label="Kosár" aria-modal="true" class="pointer-events-auto absolute top-0 right-0 flex h-full w-full max-w-[469px] translate-x-full p-2" data-book-sheet="" role="dialog">
+<div class="flex w-full flex-col gap-5 overflow-y-auto overscroll-contain rounded-lg border border-white/20 bg-light-black p-4 text-white" data-lenis-prevent="">
+<div class="flex flex-row items-center justify-between gap-4">
+<p class="is-h6">Kosár</p>
+<button aria-label="Bezárás" class="flex h-6.5 w-11 shrink-0 items-center justify-center rounded-[3px] border border-white transition-colors duration-200 hover:bg-white hover:text-black" data-book-close="" type="button">
+<svg aria-hidden="true" class="w-3" fill="none" viewbox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
+<g id="Interface">
+<path d="M2.5 6H9.5" id="Vector" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path>
+</g>
+</svg>
+</button>
+</div>
+<div class="flex flex-col gap-2">
+<button aria-selected="true" class="rounded border border-white p-0.5 pt-2! text-center transition-colors duration-200 aria-[selected=true]:bg-white aria-[selected=true]:text-black" data-book-tab="eat-and-drink" type="button">
+<span class="is-h6">Kosár</span>
+</button>
+<button aria-selected="false" class="rounded border border-white p-0.5 pt-2! text-center transition-colors duration-200 aria-[selected=true]:bg-white aria-[selected=true]:text-black" data-book-tab="venue-hire" type="button">
+<span class="is-h6">Sorozatok</span>
+</button>
+<button aria-selected="false" class="rounded border border-white p-0.5 pt-2! text-center transition-colors duration-200 aria-[selected=true]:bg-white aria-[selected=true]:text-black" data-book-tab="functions" type="button">
+<span class="is-h6">Napló</span>
+</button>
+</div>
+<div class="flex grow flex-col gap-3" data-book-pane="eat-and-drink"><div aria-live="polite" class="flex flex-col gap-4" data-cart-preview=""></div><a class="is-tag inline-block rounded-xs bg-white px-5 py-3 text-black" href="cart/">Kosár megnyitása</a></div>
+<div class="flex grow flex-col gap-3 hidden" data-book-pane="venue-hire"><a class="is-tag inline-block rounded-xs bg-white px-5 py-3 text-black" href="collections/all/">Összes termék</a><a class="is-tag inline-block rounded-xs bg-white px-5 py-3 text-black" href="collections/felnott/">Felnőtt</a><a class="is-tag inline-block rounded-xs bg-white px-5 py-3 text-black" href="collections/gyerek/">Gyerek</a></div>
+<div class="flex grow flex-col gap-3 hidden" data-book-pane="functions"><a class="is-tag inline-block rounded-xs bg-white px-5 py-3 text-black" href="blog/">A napló megnyitása</a></div>
+</div>
+</div>
+</div>

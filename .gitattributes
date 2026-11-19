@@ -1,0 +1,2 @@
+# Keep the upstream JavaScript bundle byte-for-byte.
+assets/reference/theme.js -text
