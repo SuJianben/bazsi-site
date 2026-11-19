@@ -49,6 +49,11 @@ def card(product, scope, *, in_rail=False):
                     rail_spacing=" pb-5" if in_rail else "")
 
 
+def demo_rail_slides(items, scope, *, repeats):
+    return ''.join(card(product, f"{scope}-{position}", in_rail=True)
+                   for position, product in enumerate(items * repeats, start=1))
+
+
 def grid(items, scope, searching=False):
     attrs = ' id="search-results"' if searching else ''
     cards = []
@@ -130,9 +135,10 @@ def main():
                        f"space_path_{i}": f"products/{product['id']}/"})
     wordmark = template("wordmark-paths")
     about = template("home-about", wordmark=wordmark, crest_id="home-brand-crest")
+    kids = [product for product in products if product["group"] == "gyerek"]
     home = (template("home-hero") + template("home-film")
-            + template("home-rail", all_slides=''.join(card(p, "home-all", in_rail=True) for p in products),
-                       kids_slides=''.join(card(p, "home-kids", in_rail=True) for p in products if p["group"] == "gyerek"))
+            + template("home-rail", all_slides=demo_rail_slides(products, "home-all", repeats=2),
+                       kids_slides=demo_rail_slides(kids, "home-kids", repeats=4))
             + template("home-drop") + template("tiles", tile_scope="home") + template("home-journal")
             + template("home-spaces", **spaces) + about + template("home-story"))
     write_page("", "Bazsi", home)
