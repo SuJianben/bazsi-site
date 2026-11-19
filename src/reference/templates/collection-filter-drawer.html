@@ -1,0 +1,30 @@
+<div class="sm:hidden" data-events-filter-drawer>
+<button aria-controls="collection-filter-@@SCOPE@@" aria-expanded="false" aria-haspopup="dialog" class="is-tag fixed right-6 bottom-6 z-40 flex translate-x-[calc(100%+1.5rem)] flex-row items-center gap-2 rounded-sm border-[1.5px] border-black bg-real-teal px-4 py-3 text-black" data-events-filter-open type="button">
+<svg aria-hidden="true" class="size-[1.1em] shrink-0" fill="none" viewBox="0 0 16 16">
+<path d="M1.5 4H14.5M4 8H12M6.5 12H9.5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75"></path>
+</svg>
+Szűrők
+</button>
+<div class="pointer-events-none fixed inset-0 z-60 hidden" data-events-filter-sheet-root>
+<div class="pointer-events-auto absolute inset-0 bg-black/50 opacity-0" data-events-filter-scrim></div>
+<div aria-labelledby="collection-filter-title-@@SCOPE@@" aria-modal="true" class="pointer-events-auto absolute top-0 right-0 flex h-full w-full max-w-[420px] translate-x-full p-2" data-events-filter-sheet id="collection-filter-@@SCOPE@@" role="dialog">
+<div class="flex w-full flex-col gap-5 overflow-y-auto overscroll-contain rounded-lg border border-white/20 bg-light-black p-4 text-white" data-lenis-prevent>
+<div class="flex flex-row items-center justify-between gap-4">
+<p class="is-h6" id="collection-filter-title-@@SCOPE@@">Szűrők</p>
+<button aria-label="Bezárás" class="flex h-6.5 w-11 shrink-0 items-center justify-center rounded-[3px] border border-white transition-colors duration-200 hover:bg-white hover:text-black" data-events-filter-close type="button">
+<svg aria-hidden="true" class="w-3" fill="none" viewBox="0 0 12 12">
+<path d="M2.5 6H9.5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path>
+</svg>
+</button>
+</div>
+<div class="flex flex-col gap-6">
+<p class="is-technical-scale text-white/70" id="collection-filter-label-@@SCOPE@@">Korosztály</p>
+<div aria-labelledby="collection-filter-label-@@SCOPE@@" class="flex flex-col gap-2" role="group">
+@@FILTER@@
+</div>
+</div>
+<button class="is-h6 mt-auto rounded border-[1.5px] border-black bg-real-teal p-2.5 text-center text-black transition-colors duration-200 hover:bg-white" data-events-filter-close type="button">Találatok megjelenítése</button>
+</div>
+</div>
+</div>
+</div>

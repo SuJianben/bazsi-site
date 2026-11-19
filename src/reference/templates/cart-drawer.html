@@ -12,22 +12,23 @@
 </svg>
 </button>
 </div>
-<div class="flex flex-col gap-2">
-<button aria-selected="true" class="rounded border border-white p-0.5 pt-2! text-center transition-colors duration-200 aria-[selected=true]:bg-white aria-[selected=true]:text-black" data-book-tab="eat-and-drink" type="button">
+<div class="flex flex-col gap-2" role="tablist" aria-label="Gyorsmenü" aria-orientation="vertical">
+<button aria-controls="drawer-cart" aria-selected="true" class="rounded border border-white p-0.5 pt-2! text-center transition-colors duration-200 aria-[selected=true]:bg-white aria-[selected=true]:text-black" data-book-tab="eat-and-drink" id="drawer-cart-tab" role="tab" type="button">
 <span class="is-h6">Kosár</span>
 </button>
-<button aria-selected="false" class="rounded border border-white p-0.5 pt-2! text-center transition-colors duration-200 aria-[selected=true]:bg-white aria-[selected=true]:text-black" data-book-tab="venue-hire" type="button">
+<button aria-controls="drawer-collections" aria-selected="false" class="rounded border border-white p-0.5 pt-2! text-center transition-colors duration-200 aria-[selected=true]:bg-white aria-[selected=true]:text-black" data-book-tab="venue-hire" id="drawer-collections-tab" role="tab" tabindex="-1" type="button">
 <span class="is-h6">Sorozatok</span>
 </button>
-<button aria-selected="false" class="rounded border border-white p-0.5 pt-2! text-center transition-colors duration-200 aria-[selected=true]:bg-white aria-[selected=true]:text-black" data-book-tab="functions" type="button">
+<button aria-controls="drawer-journal" aria-selected="false" class="rounded border border-white p-0.5 pt-2! text-center transition-colors duration-200 aria-[selected=true]:bg-white aria-[selected=true]:text-black" data-book-tab="functions" id="drawer-journal-tab" role="tab" tabindex="-1" type="button">
 <span class="is-h6">Napló</span>
 </button>
 </div>
-<div class="flex grow flex-col gap-3" data-book-pane="eat-and-drink">
+<div aria-labelledby="drawer-cart-tab" class="flex grow flex-col gap-3" data-book-pane="eat-and-drink" id="drawer-cart" role="tabpanel">
 <div aria-live="polite" class="flex flex-col gap-4" data-cart-preview=""></div>
+<template data-cart-empty>@@EMPTY_STATE@@</template>
 @@CART_ACTION@@
 </div>
-<div class="flex grow flex-col gap-3 hidden" data-book-pane="venue-hire">
+<div aria-labelledby="drawer-collections-tab" class="flex grow flex-col gap-3 hidden" data-book-pane="venue-hire" id="drawer-collections" role="tabpanel">
 <div class="mt-2 flex flex-col gap-8">
 <div class="flex flex-col gap-3">
 <p class="is-technical-scale text-white/70">Korosztály</p>
@@ -39,7 +40,7 @@
 @@COLLECTION_ACTION@@
 </div>
 </div>
-<div class="flex grow flex-col gap-3 hidden" data-book-pane="functions">
+<div aria-labelledby="drawer-journal-tab" class="flex grow flex-col gap-3 hidden" data-book-pane="functions" id="drawer-journal" role="tabpanel">
 <div class="mt-2 flex flex-col gap-8">
 <div class="flex flex-col gap-3">
 <p class="is-technical-scale text-white/70">Legfrissebb cikk</p>

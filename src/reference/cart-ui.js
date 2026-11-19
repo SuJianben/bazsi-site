@@ -47,13 +47,13 @@ export function renderCart() {
     label.hidden = count === 0;
     label.textContent = count ? `${count} db termék` : '';
   });
+  document.querySelectorAll('[data-cart-continue]').forEach(action => {
+    action.hidden = !count;
+  });
   for (const list of document.querySelectorAll(lists)) {
     const rows = items.map(item => cartLine(item, productById(item.id)));
     if (!rows.length) {
-      const message = document.createElement('p');
-      message.className = 'rounded-lg border border-white/20 bg-black p-6';
-      message.textContent = 'A kosarad jelenleg üres.';
-      rows.push(message);
+      rows.push(list.parentElement.querySelector('[data-cart-empty]').content.cloneNode(true));
     }
     list.replaceChildren(...rows);
   }

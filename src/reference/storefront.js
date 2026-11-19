@@ -1,9 +1,10 @@
 import { productById } from '../data/products.js';
 import { track } from '../analytics/events.js?v=2';
-import { mountSearch } from './catalog-ui.js?v=1';
-import { renderCart } from './cart-ui.js';
+import { mountSearch } from './catalog-ui.js?v=4';
+import { renderCart } from './cart-ui.js?v=1';
 import { enableNewsletterPreview } from './newsletter-preview.js?v=1';
 import './home-film-motion.js?v=2';
+import './overlay-focus.js';
 
 const asset = path => new URL(path, document.baseURI).href;
 
@@ -41,10 +42,13 @@ function mountPage() {
 }
 
 document.addEventListener('swup:visit:start', () => {
-  if (document.activeElement?.closest('#page-frame')) document.activeElement.blur();
-});
-document.addEventListener('swup:page:view', () => {
-  mountPage();
+  window.app.transitions.swup.hooks.before('content:insert', () => {
+    // Closing a drawer during navigation can return focus to the old page.
+    if (document.activeElement?.closest('#page-frame')) document.activeElement.blur();
+  });
+}, { once: true });
+document.addEventListener('swup:page:view', mountPage);
+document.addEventListener('swup:visit:end', () => {
   document.querySelector('#page-frame:not(.is-previous-container) main')?.focus({ preventScroll: true });
 });
 mountPage();

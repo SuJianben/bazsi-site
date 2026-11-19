@@ -1,5 +1,6 @@
 <div class="store-cart-page flex flex-col gap-8">
 <p class="is-technical-scale text-white/70" aria-live="polite" data-cart-count></p>
-<div class="flex flex-col gap-4" data-cart-list></div>
-<div>@@CONTINUE_LINK@@</div>
+<div class="flex flex-col gap-4" data-cart-list aria-live="polite"></div>
+<template data-cart-empty>@@EMPTY_STATE@@</template>
+<div data-cart-continue hidden>@@CONTINUE_LINK@@</div>
 </div>

@@ -55,8 +55,21 @@ def theme_link(label, href, color, *, drawer=False):
                     face_color=color, extra_class=" [--tilt:0deg] [--turn:90deg]" if drawer else "")
 
 
+def empty_state(message, *, label="", href=None, attrs="", compact=False):
+    action = ""
+    if label:
+        action = template("theme-action", action_tag="a" if href else "button",
+                          action_layout="inline-block min-w-0",
+                          action_attrs=f'href="{escape(href)}"' if href else 'type="reset" form="store-search"',
+                          button_label=escape(label), face_color="hello-yellow",
+                          extra_class=" [--face:3.5em] [--tilt:0deg] [--turn:90deg]")
+    return template("empty-state", message=escape(message), action=action, state_attrs=attrs,
+                    spacing="p-6" if compact else "px-8 py-12 sm:py-16")
+
+
 def cart_drawer():
     return template("cart-drawer",
+                    empty_state=empty_state("A kosarad jelenleg üres.", compact=True),
                     cart_action=theme_link("Kosár megnyitása", "cart/", "hot-pink", drawer=True),
                     collection_action=theme_link("Összes termék", "collections/all/", "hot-pink", drawer=True),
                     journal_action=theme_link("A napló megnyitása", "blog/", "hot-pink", drawer=True))
@@ -89,19 +102,20 @@ def demo_rail_slides(items, scope, *, repeats):
 
 
 def grid(items, scope, *, searching=False, related=False):
-    attrs = ' id="search-results"' if searching else ''
     gaps = "gap-6" if related else "gap-4 sm:gap-y-8 lg:gap-x-6 lg:gap-y-12"
     cards = ''.join(card(item, scope, searching=searching) for item in items)
-    return f'<div class="grid grid-cols-1 {gaps} sm:grid-cols-2 lg:grid-cols-3"{attrs}>{cards}</div>'
+    return f'<div class="grid grid-cols-1 {gaps} sm:grid-cols-2 lg:grid-cols-3">{cards}</div>'
 
 
-def collection_filter(current):
+def collection_filter(current, *, drawer=False):
     options = []
     for slug, label in COLLECTION_FILTERS.items():
         selected = ' aria-current="page"' if slug == current else ''
-        options.append(f'<a class="store-filter-option is-tag rounded-xs px-4 py-3 text-light-black" '
-                       f'href="collections/{slug}/"{selected}>{label}</a>')
-    return template("collection-filter", current_label=COLLECTION_FILTERS[current], options=''.join(options))
+        options.append(f'<a class="store-filter-option is-tag rounded-xs px-3 py-3 text-black transition-colors duration-150" '
+                       f'data-events-filter href="collections/{slug}/#collection-results-{slug}"{selected}>{label}</a>')
+    return template("collection-filter", current_label=COLLECTION_FILTERS[current],
+                    width="w-full" if drawer else "w-full sm:w-42",
+                    active="" if current == "all" else " data-active", options=''.join(options))
 
 
 def section(content, extra=""):
@@ -203,9 +217,12 @@ def main():
     write_page("collections", "Sorozatok", banner("Sorozatok") + template("tiles", tile_scope="collections"))
     for slug, title in [("all", "Összes termék"), ("felnott", "Felnőtt kollekció"), ("gyerek", "Gyerek kollekció")]:
         items = [item for item in products if slug == "all" or item["group"] == slug]
-        listing = ('<section class="overflow-hidden pt-10! text-white lg:pt-16!">'
+        filters = ('<nav aria-label="Korosztály" class="grid w-full grid-cols-2 items-center gap-1 sm:flex sm:flex-wrap" '
+                   'data-events-filters-inline>' + collection_filter(slug) + '</nav>')
+        drawer = template("collection-filter-drawer", scope=slug, filter=collection_filter(slug, drawer=True))
+        listing = (f'<section class="overflow-hidden pt-10! text-white lg:pt-16!" data-events-archive id="collection-results-{slug}">'
                    '<div class="container flex flex-col gap-8 lg:gap-14">'
-                   + collection_filter(slug) + grid(items, f"collection-{slug}") + '</div></section>')
+                   + filters + grid(items, f"collection-{slug}") + '</div>' + drawer + '</section>')
         write_page(f"collections/{slug}", title, banner(title) + listing)
     for product in products:
         sizes = ''.join(f'<option class="bg-white text-black" value="{size}">{size}</option>' for size in product["sizes"])
@@ -230,9 +247,15 @@ def main():
     write_page("about", "A márka", banner("A márka") + about_page.replace('href="@@ROOT@@about/"',
                'href="@@ROOT@@collections/all/"').replace('A történetünk', 'A kollekció') + story_teaser())
     search_form = template("form-search", field_class=FIELD_CLASS)
+    search_empty = empty_state("Nincs találat. Próbálj másik kifejezést.",
+                               label="Keresés törlése", attrs=" data-search-status hidden")
+    search_results = f'<div id="search-results">{grid(products, "search", searching=True)}{search_empty}</div>'
     write_page("search", "Keresés", template("tool-page", title="Keresés",
-               body=search_form + grid(products, "search", searching=True)))
-    basket = template("cart-page", continue_link=theme_link("Vissza a kollekcióhoz", "collections/all/", "pink-pairing"))
+               body=search_form + search_results))
+    basket = template("cart-page",
+                      empty_state=empty_state("A kosarad jelenleg üres.",
+                                              label="Vissza a kollekcióhoz", href="collections/all/"),
+                      continue_link=theme_link("Vissza a kollekcióhoz", "collections/all/", "pink-pairing"))
     write_page("cart", "Kosár", template("tool-page", title="A kosarad", body=basket))
     write_page("", "Az oldal nem található", template("not-found")
                + section(small_link("Vissza a főoldalra", "./")), filename="404.html")

@@ -32,7 +32,11 @@
 }
 
 .store-collection-filter[open] summary svg {
-  rotate: 180deg;
+  rotate: -90deg;
+}
+
+[data-events-archive][id] {
+  scroll-margin-top: 7rem;
 }
 
 .store-filter-option:is(:hover, :focus-visible, [aria-current="page"]) {
