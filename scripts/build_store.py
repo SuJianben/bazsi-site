@@ -6,7 +6,7 @@ import json
 import re
 import subprocess
 
-from brand_assets import BURST_ART, HERO_ART, artwork, showcase_art
+from brand_assets import BURST_ART, HERO_ART, artwork, falling_art, showcase_art
 
 ROOT = Path(__file__).resolve().parents[1]
 TEMPLATES = ROOT / "src/reference/templates"
@@ -39,10 +39,6 @@ def template(name, **values):
     for key, value in values.items():
         source = source.replace("@@" + key.upper() + "@@", str(value))
     return source
-
-
-def small_link(label, href):
-    return f'<a class="is-tag inline-block rounded-xs bg-white px-5 py-3 text-black transition-colors hover:bg-hello-yellow" href="{href}">{label}</a>'
 
 
 def form_button(label, color, *, newsletter=False):
@@ -147,10 +143,6 @@ def product_size_dropdown(product):
                     label_attrs=f' id="{label_id}"', options=options)
 
 
-def section(content, extra=""):
-    return f'<section class="bg-light-black text-white {extra}"><div class="container">{content}</div></section>'
-
-
 def write_page(route, title, content, filename="index.html"):
     depth = len(route.strip("/").split("/")) if route else 0
     prefix = "../" * depth or "./"
@@ -235,17 +227,19 @@ def home_film():
 
 
 def main():
-    spaces = {}
-    tee_notes = {
+    showcase_products = {
+        "felnott-pulover": None,
         "felnott-polo": "Fekete póló a mindennapokra, apró Limitless Essentials emblémával.",
-        "gyerek-polo": "Egy mindennapi alapdarab gyerekeknek. A fekete póló mellkasán, bal oldalt apró Limitless Essentials embléma látható.",
     }
-    for i, product in enumerate(products):
+    products_by_id = {product["id"]: product for product in products}
+    # One viewport for the sticky frame, then two viewports of travel per product.
+    spaces = {"scroll_height": 100 + 200 * len(showcase_products)}
+    for i, (product_id, note) in enumerate(showcase_products.items()):
+        product = products_by_id[product_id]
         label = f'{groups[product["group"]]} {product["type"].lower()}'
-        note = escape(tee_notes.get(product["id"], product["description"]))
         spaces.update({f"space_image_{i}": product["image"],
                        f"space_name_{i}": escape(product["name"]),
-                       f"space_label_{i}": escape(label), f"space_note_{i}": note,
+                       f"space_label_{i}": escape(label), f"space_note_{i}": escape(note or product["description"]),
                        f"space_path_{i}": f"products/{product['id']}/",
                        f"space_art_{i}": showcase_art(i)})
     wordmark = template("wordmark-paths")
@@ -308,8 +302,9 @@ def main():
                                               label="Vissza a kollekcióhoz", href="collections/all/"),
                       continue_link=theme_link("Vissza a kollekcióhoz", "collections/all/", "pink-pairing"))
     write_page("cart", "Kosár", template("tool-page", title="A kosarad", body=basket))
-    write_page("", "Az oldal nem található", template("not-found")
-               + section(small_link("Vissza a főoldalra", "./")), filename="404.html")
+    not_found = template("not-found", falling_art=falling_art(),
+                         home_action=theme_link("Vissza a főoldalra", "./", "hello-yellow"))
+    write_page("", "Az oldal nem található", not_found, filename="404.html")
 
 
 if __name__ == "__main__":

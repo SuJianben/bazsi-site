@@ -16,15 +16,17 @@ BURST_ART = (
     "headset", "football", "boots", "whistle", "gamepad", "football",
     "tactics-board", "hoodie-mascot", "boots", "street-player", "tactics-board", "gamepad",
 )
+FALLING_ART = (
+    ("football", "w-28 sm:w-44"), ("gamepad", "w-20 sm:w-32"),
+    ("whistle", "w-16 sm:w-28"), ("boots", "w-28 sm:w-44"),
+    ("headset", "w-24 sm:w-36"), ("hoodie-mascot", "w-24 sm:w-44"),
+    ("tactics-board", "w-24 sm:w-36"), ("street-player", "w-20 sm:w-28"),
+)
 SHOWCASE_ART = (
     (("headset", 803, 59, 225, 205), ("boots", 128, 140, 248, 165),
      ("hoodie-mascot", 426, 288, 225, 222)),
-    (("football", 75, 18, 255, 148), ("gamepad", 492, 130, 228, 180),
-     ("whistle", 1006, 155, 170, 155), ("hoodie-mascot", 440, 320, 196, 190)),
     (("street-player", 214, 169, 206, 270), ("football", 748, 139, 188, 125),
      ("whistle", 538, 66, 125, 132)),
-    (("headset", 191, 93, 188, 185), ("gamepad", 411, 292, 198, 159),
-     ("tactics-board", 850, 132, 235, 176), ("football", 913, 364, 143, 92)),
 )
 
 
@@ -34,6 +36,14 @@ def artwork(name, classes):
         f'<svg aria-hidden="true" class="{classes}" viewBox="0 0 {width} {height}">'
         f'<image href="@@ROOT@@assets/brand/{name}.webp" width="{width}" height="{height}"/>'
         '</svg>'
+    )
+
+
+def falling_art():
+    return "\n".join(
+        f'<div class="absolute top-0 left-0 will-change-transform {width}" data-falling-icon>'
+        f'{artwork(name, "block h-auto w-full")}</div>'
+        for name, width in FALLING_ART * 2
     )
 
 
