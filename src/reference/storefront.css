@@ -39,7 +39,7 @@
 
 .store-creator-film-action {
   position: absolute;
-  inset: 70% 0 auto;
+  inset: 81% 0 auto;
   z-index: 21;
   display: grid;
   justify-items: center;
@@ -184,10 +184,6 @@ html:has(#page-frame.is-previous-container):has(#page-frame:not(.is-previous-con
 }
 
 @media (width < 40rem) {
-  [data-creator-film-loop] {
-    object-position: 39% center;
-  }
-
   .store-cart-row {
     grid-template-columns: calc(var(--spacing) * 14) minmax(0, 1fr);
   }

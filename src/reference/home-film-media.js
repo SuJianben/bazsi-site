@@ -1,6 +1,9 @@
 import { track } from '../analytics/events.js?v=3';
 
+let cropListener;
+
 export function mountCreatorFilm(page) {
+  cropListener?.abort();
   const section = page?.querySelector('[data-creator-film]');
   if (!section) return;
 
@@ -9,7 +12,22 @@ export function mountCreatorFilm(page) {
   const frame = section.querySelector('[data-creator-video-frame]');
   const loop = section.querySelector('[data-creator-film-loop]');
   const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)');
+  const [portrait, landscape] = loop.querySelectorAll('source');
+  const narrowViewport = matchMedia(portrait.media);
+  const setPoster = () => {
+    loop.poster = (narrowViewport.matches ? portrait : landscape).dataset.poster;
+  };
+  setPoster();
+  loop.autoplay = !reduceMotion.matches;
   if (reduceMotion.matches) loop.pause();
+
+  cropListener = new AbortController();
+  narrowViewport.addEventListener('change', () => {
+    setPoster();
+    loop.autoplay = !reduceMotion.matches && !dialog.open;
+    loop.load();
+  }, { signal: cropListener.signal });
+
   if (typeof dialog.showModal !== 'function') return;
   link.setAttribute('aria-haspopup', 'dialog');
 
@@ -31,7 +49,8 @@ export function mountCreatorFilm(page) {
   dialog.addEventListener('close', () => {
     frame.removeAttribute('src');
     window.app?.smoothScroll.lenis.start();
-    if (!reduceMotion.matches && section.isConnected) loop.play().catch(() => {});
+    loop.autoplay = !reduceMotion.matches;
+    if (loop.autoplay && section.isConnected) loop.play().catch(() => {});
   });
 }
 

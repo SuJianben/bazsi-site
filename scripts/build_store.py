@@ -20,7 +20,7 @@ products = json.loads(subprocess.check_output([
 ], cwd=ROOT, encoding="utf-8"))
 groups = {"felnott": "Felnőtt", "gyerek": "Gyerek"}
 COLLECTION_FILTERS = {"all": "Összes termék", "felnott": "Felnőtt", "gyerek": "Gyerek"}
-CREATOR_VIDEO_URL = "https://www.youtube.com/watch?v=vaKc2E2kAiA"
+CREATOR_VIDEO_URL = "https://www.youtube.com/watch?v=XmJK0aZdHcw"
 RAIL_CARD_LAYOUT = ("w-9/10 shrink-0 pr-3 sm:w-3/5 sm:pr-3 md:w-[calc(50%+0.5em)] "
                     "lg:w-[calc(33.3333%+0.25em)] xl:w-[calc(25%+0.25em)] 3xl:w-[calc(20%+0.25em)]")
 FIELD_CLASS = ("store-field w-full rounded border-2 border-light-black bg-white px-4 py-2.5 "
