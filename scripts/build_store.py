@@ -219,13 +219,6 @@ def story_teaser(*, blog=False):
                     link_label="Cikk megnyitása" if blog else "A napló")
 
 
-def home_film():
-    action = template("theme-action", action_tag="a", action_layout="store-theme-link inline-block max-w-full",
-                      action_attrs=f'href="{CREATOR_VIDEO_URL}" target="_blank" rel="noopener" data-creator-video-open',
-                      button_label="Bazsi videója", face_color="hello-yellow", extra_class="")
-    return template("home-film", creator_video_url=CREATOR_VIDEO_URL, film_action=action)
-
-
 def main():
     showcase_products = {
         "felnott-pulover": None,
@@ -249,7 +242,7 @@ def main():
         f"hero_{name}": artwork(name, "h-full w-auto will-change-transform") for name in HERO_ART
     })
     banner_art_classes = "w-1/2 md:w-full md:top-1/2 md:-translate-y-1/2 md:left-0 md:absolute"
-    home = (hero + home_film()
+    home = (hero + template("home-film", creator_video_url=CREATOR_VIDEO_URL)
             + template("home-rail", all_slides=demo_rail_slides(products, "home-all", repeats=2),
                        kids_slides=demo_rail_slides(kids, "home-kids", repeats=4))
             + template("home-drop", drop_art=artwork("hoodie-mascot", banner_art_classes))

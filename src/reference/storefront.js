@@ -1,7 +1,7 @@
 import { productById } from '../data/products.js';
 import { track } from '../analytics/events.js?v=2';
 import { mountSearch } from './catalog-ui.js?v=5';
-import { mountCreatorFilm } from './home-film-media.js?v=2';
+import { mountCreatorFilm } from './home-film-media.js?v=3';
 import { mountCollection } from './collection-filter.js?v=2';
 import { mountProductSizes } from './product-size.js';
 import { renderCart } from './cart-ui.js?v=1';

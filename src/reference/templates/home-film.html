@@ -1,10 +1,13 @@
 <section class="relative bg-light-black max-sm:!pb-0" data-creator-film>
 <div class="relative min-h-[125lvh]">
-<video aria-hidden="true" autoplay class="absolute top-0 left-0 h-full w-full object-cover [clip-path:ellipse(150%_100%_at_50%_100%)] lg:[clip-path:ellipse(100%_100%_at_50%_100%)]" data-creator-film-loop loop muted playsinline poster="@@ROOT@@assets/brand/bazsi-penalty-wide.webp" preload="metadata">
+<a aria-label="Call Out Penalties – Bazsi (YouTube, új lapon)" class="store-creator-film-link absolute inset-0 block cursor-pointer [clip-path:ellipse(150%_100%_at_50%_100%)] lg:[clip-path:ellipse(100%_100%_at_50%_100%)]" data-creator-video-open href="@@CREATOR_VIDEO_URL@@" rel="noopener noreferrer" target="_blank">
+<video aria-hidden="true" autoplay class="pointer-events-none absolute top-0 left-0 h-full w-full object-cover" data-creator-film-loop loop muted playsinline poster="@@ROOT@@assets/brand/bazsi-penalty-wide.webp" preload="metadata">
 <source media="(max-width: 639px)" src="@@ROOT@@assets/brand/bazsi-penalty-mobile.mp4" type="video/mp4" data-poster="@@ROOT@@assets/brand/bazsi-penalty-mobile.webp">
 <source src="@@ROOT@@assets/brand/bazsi-penalty-wide.mp4" type="video/mp4" data-poster="@@ROOT@@assets/brand/bazsi-penalty-wide.webp">
 </video>
-<svg aria-hidden="true" data-crest-scroll data-home-film-wordmark class="absolute top-full -translate-y-[65%] left-1/2 -translate-x-1/2 w-[90%] z-20 text-white" viewBox="0 -5 350 80" xmlns="http://www.w3.org/2000/svg">
+<div class="absolute bottom-0 left-0 z-10 h-1/2 w-full bg-gradient-to-t from-light-black to-light-black/0"></div>
+</a>
+<svg aria-hidden="true" data-crest-scroll data-home-film-wordmark class="pointer-events-none absolute top-full -translate-y-[65%] left-1/2 -translate-x-1/2 w-[90%] z-20 text-white" viewBox="0 -5 350 80" xmlns="http://www.w3.org/2000/svg">
 <defs>
 <g id="home-film-wordmark" fill="currentColor" text-anchor="middle">
 <text font-family="Founders Grotesk Medium, sans-serif" font-size="49" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="300" x="175" y="40">LIMITLESS</text>
@@ -16,15 +19,5 @@
 <g clip-path="url(#home-film-wordmark-left)" class="will-change-transform"><use href="#home-film-wordmark"></use></g>
 <g clip-path="url(#home-film-wordmark-right)" class="will-change-transform"><use href="#home-film-wordmark"></use></g>
 </svg>
-<div class="absolute bottom-0 left-0 z-10 h-1/2 w-full bg-gradient-to-t from-light-black to-light-black/0"></div>
-<div class="store-creator-film-action">@@FILM_ACTION@@</div>
 </div>
-<dialog aria-labelledby="creator-video-title" class="store-creator-video" data-creator-video-dialog>
-<div class="store-creator-video-header">
-<h2 class="is-h6" id="creator-video-title">Bazsi videója</h2>
-<form method="dialog"><button autofocus class="is-tag store-creator-video-close" type="submit">Bezárás</button></form>
-</div>
-<iframe allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen data-creator-video-frame referrerpolicy="strict-origin-when-cross-origin" title="Call Out Penalties kihívás – Bazsi"></iframe>
-<a class="is-technical-scale store-creator-video-source" href="@@CREATOR_VIDEO_URL@@" rel="noopener" target="_blank">Megnyitás a YouTube-on ↗</a>
-</dialog>
 </section>

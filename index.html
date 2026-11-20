@@ -10,8 +10,8 @@
 <base href="./">
 <script>const storeRoot = new URL("./", location.href);document.querySelector("base").href = storeRoot.href;</script>
 <link rel="stylesheet" href="assets/reference/theme.css">
-<link rel="stylesheet" href="src/reference/storefront.css?v=e38a34abc266">
-<script type="module" src="src/reference/storefront.js?v=a3177940b9b1"></script>
+<link rel="stylesheet" href="src/reference/storefront.css?v=f136d2539810">
+<script type="module" src="src/reference/storefront.js?v=5244b8851c8d"></script>
 <script defer src="assets/reference/theme.js"></script>
 </head>
 <body class="min-h-screen">
@@ -483,11 +483,14 @@
 </section>
 <section class="relative bg-light-black max-sm:!pb-0" data-creator-film>
 <div class="relative min-h-[125lvh]">
-<video aria-hidden="true" autoplay class="absolute top-0 left-0 h-full w-full object-cover [clip-path:ellipse(150%_100%_at_50%_100%)] lg:[clip-path:ellipse(100%_100%_at_50%_100%)]" data-creator-film-loop loop muted playsinline poster="assets/brand/bazsi-penalty-wide.webp" preload="metadata">
+<a aria-label="Call Out Penalties – Bazsi (YouTube, új lapon)" class="store-creator-film-link absolute inset-0 block cursor-pointer [clip-path:ellipse(150%_100%_at_50%_100%)] lg:[clip-path:ellipse(100%_100%_at_50%_100%)]" data-creator-video-open href="https://www.youtube.com/watch?v=XmJK0aZdHcw" rel="noopener noreferrer" target="_blank">
+<video aria-hidden="true" autoplay class="pointer-events-none absolute top-0 left-0 h-full w-full object-cover" data-creator-film-loop loop muted playsinline poster="assets/brand/bazsi-penalty-wide.webp" preload="metadata">
 <source media="(max-width: 639px)" src="assets/brand/bazsi-penalty-mobile.mp4" type="video/mp4" data-poster="assets/brand/bazsi-penalty-mobile.webp">
 <source src="assets/brand/bazsi-penalty-wide.mp4" type="video/mp4" data-poster="assets/brand/bazsi-penalty-wide.webp">
 </video>
-<svg aria-hidden="true" data-crest-scroll data-home-film-wordmark class="absolute top-full -translate-y-[65%] left-1/2 -translate-x-1/2 w-[90%] z-20 text-white" viewBox="0 -5 350 80" xmlns="http://www.w3.org/2000/svg">
+<div class="absolute bottom-0 left-0 z-10 h-1/2 w-full bg-gradient-to-t from-light-black to-light-black/0"></div>
+</a>
+<svg aria-hidden="true" data-crest-scroll data-home-film-wordmark class="pointer-events-none absolute top-full -translate-y-[65%] left-1/2 -translate-x-1/2 w-[90%] z-20 text-white" viewBox="0 -5 350 80" xmlns="http://www.w3.org/2000/svg">
 <defs>
 <g id="home-film-wordmark" fill="currentColor" text-anchor="middle">
 <text font-family="Founders Grotesk Medium, sans-serif" font-size="49" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="300" x="175" y="40">LIMITLESS</text>
@@ -499,33 +502,7 @@
 <g clip-path="url(#home-film-wordmark-left)" class="will-change-transform"><use href="#home-film-wordmark"></use></g>
 <g clip-path="url(#home-film-wordmark-right)" class="will-change-transform"><use href="#home-film-wordmark"></use></g>
 </svg>
-<div class="absolute bottom-0 left-0 z-10 h-1/2 w-full bg-gradient-to-t from-light-black to-light-black/0"></div>
-<div class="store-creator-film-action"><a aria-label="Bazsi videója" class="is-button is-technical-scale group/btn relative store-theme-link inline-block max-w-full cursor-pointer appearance-none [transform:rotate(calc(var(--dir)*var(--tilt)*var(--on,0)))] transition-transform duration-300 ease-fancy [--dir:var(--btn-dir,1)] [--face:3.25em] [--tilt:-4deg] [--turn:80deg] [perspective:700px] hover:z-10 hover:[--on:1]" href="https://www.youtube.com/watch?v=XmJK0aZdHcw" target="_blank" rel="noopener" data-creator-video-open>
-<span class="relative block h-[var(--face)] [transform:translateZ(calc(var(--face)/-2))_rotateX(calc(var(--dir)*var(--turn)*var(--on,0)))] transition-transform duration-300 ease-fancy [transform-style:preserve-3d]">
-<span class="relative flex h-full w-full [transform:translateZ(calc(var(--face)/2))] items-center justify-center gap-2 rounded border-2 border-black px-8 [filter:brightness(calc(1-0.1*var(--on,0)))] transition-[filter] duration-300 ease-fancy backface-hidden bg-white text-black">
-<svg class="size-[max(14px,0.75vw)] shrink-0" fill="none" viewbox="0 0 15 12" xmlns="http://www.w3.org/2000/svg">
-<path d="M14.7099 6.73637C14.9651 6.48114 14.9651 6.06732 14.7099 5.81209L10.5506 1.65282C10.2954 1.39759 9.88156 1.39759 9.62632 1.65282C9.37109 1.90806 9.37109 2.32187 9.62632 2.5771L13.3234 6.27423L9.62632 9.97136C9.37109 10.2266 9.37109 10.6404 9.62632 10.8956C9.88156 11.1509 10.2954 11.1509 10.5506 10.8956L14.7099 6.73637ZM0.653564 6.27423L-1.13246e-06 6.27423L-1.13245e-06 6.9278L0.653564 6.9278L0.653564 6.27423ZM14.2477 6.27423L14.2477 5.62066L0.653564 5.62066L0.653564 6.27423L0.653564 6.9278L14.2477 6.9278L14.2477 6.27423ZM0.653564 6.27423L1.30713 6.27423L1.30713 0L0.653564 0L-1.13249e-06 0L-1.13246e-06 6.27423L0.653564 6.27423Z" fill="currentColor"></path>
-</svg>
-<span>Bazsi videója</span>
-</span>
-<span class="absolute inset-0 flex transform-[rotateX(calc(var(--dir)*-90deg))_translateZ(calc(var(--face)/2))] items-center justify-center gap-2 rounded border-2 border-black px-8 text-black backface-hidden bg-hello-yellow">
-<svg class="size-[max(14px,0.75vw)] shrink-0" fill="none" viewbox="0 0 15 12" xmlns="http://www.w3.org/2000/svg">
-<path d="M14.7099 6.73637C14.9651 6.48114 14.9651 6.06732 14.7099 5.81209L10.5506 1.65282C10.2954 1.39759 9.88156 1.39759 9.62632 1.65282C9.37109 1.90806 9.37109 2.32187 9.62632 2.5771L13.3234 6.27423L9.62632 9.97136C9.37109 10.2266 9.37109 10.6404 9.62632 10.8956C9.88156 11.1509 10.2954 11.1509 10.5506 10.8956L14.7099 6.73637ZM0.653564 6.27423L-1.13246e-06 6.27423L-1.13245e-06 6.9278L0.653564 6.9278L0.653564 6.27423ZM14.2477 6.27423L14.2477 5.62066L0.653564 5.62066L0.653564 6.27423L0.653564 6.9278L14.2477 6.9278L14.2477 6.27423ZM0.653564 6.27423L1.30713 6.27423L1.30713 0L0.653564 0L-1.13249e-06 0L-1.13246e-06 6.27423L0.653564 6.27423Z" fill="currentColor"></path>
-</svg>
-<span>Bazsi videója</span>
-</span>
-</span>
-</a>
 </div>
-</div>
-<dialog aria-labelledby="creator-video-title" class="store-creator-video" data-creator-video-dialog>
-<div class="store-creator-video-header">
-<h2 class="is-h6" id="creator-video-title">Bazsi videója</h2>
-<form method="dialog"><button autofocus class="is-tag store-creator-video-close" type="submit">Bezárás</button></form>
-</div>
-<iframe allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen data-creator-video-frame referrerpolicy="strict-origin-when-cross-origin" title="Call Out Penalties kihívás – Bazsi"></iframe>
-<a class="is-technical-scale store-creator-video-source" href="https://www.youtube.com/watch?v=XmJK0aZdHcw" rel="noopener" target="_blank">Megnyitás a YouTube-on ↗</a>
-</dialog>
 </section>
 <div data-block="events">
 <section class="-mt-px overflow-hidden text-white" data-events="">
