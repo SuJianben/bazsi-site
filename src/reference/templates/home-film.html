@@ -1,6 +1,8 @@
-<section class="relative bg-light-black max-sm:!pb-0">
+<section class="relative bg-light-black max-sm:!pb-0" data-creator-film>
 <div class="relative min-h-[125lvh]">
-<video autoplay="" class="absolute top-0 left-0 h-full w-full object-cover [clip-path:ellipse(150%_100%_at_50%_100%)] lg:[clip-path:ellipse(100%_100%_at_50%_100%)]" loop="" muted="" playsinline="" src="@@ROOT@@assets/reference/rechabite-website.mp4"></video>
+<video aria-hidden="true" autoplay class="absolute top-0 left-0 h-full w-full object-cover [clip-path:ellipse(150%_100%_at_50%_100%)] lg:[clip-path:ellipse(100%_100%_at_50%_100%)]" data-creator-film-loop loop muted playsinline poster="@@ROOT@@assets/brand/night-pitch.webp" preload="metadata">
+<source src="@@ROOT@@assets/brand/night-pitch-loop.mp4" type="video/mp4">
+</video>
 <svg aria-hidden="true" data-crest-scroll data-home-film-wordmark class="absolute top-full -translate-y-[65%] left-1/2 -translate-x-1/2 w-[90%] z-20 text-white" viewBox="0 -5 350 80" xmlns="http://www.w3.org/2000/svg">
 <defs>
 <g id="home-film-wordmark" fill="currentColor" text-anchor="middle">
@@ -14,5 +16,14 @@
 <g clip-path="url(#home-film-wordmark-right)" class="will-change-transform"><use href="#home-film-wordmark"></use></g>
 </svg>
 <div class="absolute bottom-0 left-0 z-10 h-1/2 w-full bg-gradient-to-t from-light-black to-light-black/0"></div>
+<div class="store-creator-film-action">@@FILM_ACTION@@</div>
 </div>
+<dialog aria-labelledby="creator-video-title" class="store-creator-video" data-creator-video-dialog>
+<div class="store-creator-video-header">
+<h2 class="is-h6" id="creator-video-title">Bazsi videója</h2>
+<form method="dialog"><button autofocus class="is-tag store-creator-video-close" type="submit">Bezárás</button></form>
+</div>
+<iframe allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen data-creator-video-frame referrerpolicy="strict-origin-when-cross-origin" title="Újjáépítettem a FRADI csapatát! (FC 26) – Bazsi"></iframe>
+<a class="is-technical-scale store-creator-video-source" href="@@CREATOR_VIDEO_URL@@" rel="noopener" target="_blank">Megnyitás a YouTube-on ↗</a>
+</dialog>
 </section>

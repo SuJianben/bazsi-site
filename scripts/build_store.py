@@ -6,6 +6,8 @@ import json
 import re
 import subprocess
 
+from brand_assets import BURST_ART, HERO_ART, artwork, showcase_art
+
 ROOT = Path(__file__).resolve().parents[1]
 TEMPLATES = ROOT / "src/reference/templates"
 STOREFRONT_SCRIPT = "src/reference/storefront.js"
@@ -18,6 +20,7 @@ products = json.loads(subprocess.check_output([
 ], cwd=ROOT, encoding="utf-8"))
 groups = {"felnott": "Felnőtt", "gyerek": "Gyerek"}
 COLLECTION_FILTERS = {"all": "Összes termék", "felnott": "Felnőtt", "gyerek": "Gyerek"}
+CREATOR_VIDEO_URL = "https://www.youtube.com/watch?v=vaKc2E2kAiA"
 RAIL_CARD_LAYOUT = ("w-9/10 shrink-0 pr-3 sm:w-3/5 sm:pr-3 md:w-[calc(50%+0.5em)] "
                     "lg:w-[calc(33.3333%+0.25em)] xl:w-[calc(25%+0.25em)] 3xl:w-[calc(20%+0.25em)]")
 FIELD_CLASS = ("store-field w-full rounded border-2 border-light-black bg-white px-4 py-2.5 "
@@ -154,8 +157,14 @@ def write_page(route, title, content, filename="index.html"):
     title = escape(title)
     page_key = route.replace("/", "-") or ("home" if filename == "index.html" else "not-found")
     newsletter = template("home-footer-feature", form_id=f"newsletter-{page_key}", field_class=FIELD_CLASS,
+                          newsletter_art=artwork("street-player",
+                                                "w-full md:top-1/2 md:-translate-y-1/2 md:left-0 md:absolute will-change-transform"),
                           submit_button=form_button("Feliratkozás", "red-pairing", newsletter=True))
     footer = template("footer", wordmark=template("wordmark-paths"), footer_feature=newsletter)
+    burst = template("icon-burst", **{
+        f"burst_art_{index}": artwork(name, "h-auto w-full will-change-transform")
+        for index, name in enumerate(BURST_ART)
+    })
     initial = (
         'const storeRoot = new URL(' + json.dumps(prefix) + ', location.href);'
         'document.querySelector("base").href = storeRoot.href;'
@@ -181,7 +190,7 @@ def write_page(route, title, content, filename="index.html"):
 {template("header")}
 {template("backdrop")}
 {cart_drawer()}
-{template("icon-burst")}
+{burst}
 <div id="page-frame">
 <main id="page-content" tabindex="-1">{content}</main>
 {footer}
@@ -218,6 +227,13 @@ def story_teaser(*, blog=False):
                     link_label="Cikk megnyitása" if blog else "A napló")
 
 
+def home_film():
+    action = template("theme-action", action_tag="a", action_layout="store-theme-link inline-block max-w-full",
+                      action_attrs=f'href="{CREATOR_VIDEO_URL}" target="_blank" rel="noopener" data-creator-video-open',
+                      button_label="Bazsi videója", face_color="hello-yellow", extra_class="")
+    return template("home-film", creator_video_url=CREATOR_VIDEO_URL, film_action=action)
+
+
 def main():
     spaces = {}
     tee_notes = {
@@ -230,14 +246,21 @@ def main():
         spaces.update({f"space_image_{i}": product["image"],
                        f"space_name_{i}": escape(product["name"]),
                        f"space_label_{i}": escape(label), f"space_note_{i}": note,
-                       f"space_path_{i}": f"products/{product['id']}/"})
+                       f"space_path_{i}": f"products/{product['id']}/",
+                       f"space_art_{i}": showcase_art(i)})
     wordmark = template("wordmark-paths")
     about = template("home-about", wordmark=wordmark, crest_id="home-brand-crest")
     kids = [product for product in products if product["group"] == "gyerek"]
-    home = (template("home-hero") + template("home-film")
+    hero = template("home-hero", **{
+        f"hero_{name}": artwork(name, "h-full w-auto will-change-transform") for name in HERO_ART
+    })
+    banner_art_classes = "w-1/2 md:w-full md:top-1/2 md:-translate-y-1/2 md:left-0 md:absolute"
+    home = (hero + home_film()
             + template("home-rail", all_slides=demo_rail_slides(products, "home-all", repeats=2),
                        kids_slides=demo_rail_slides(kids, "home-kids", repeats=4))
-            + template("home-drop") + template("tiles", tile_scope="home") + template("home-journal")
+            + template("home-drop", drop_art=artwork("hoodie-mascot", banner_art_classes))
+            + template("tiles", tile_scope="home")
+            + template("home-journal", journal_art=artwork("tactics-board", banner_art_classes))
             + template("home-spaces", **spaces) + about + story_teaser())
     write_page("", "Bazsi", home)
     write_page("collections", "Sorozatok", banner("Sorozatok") + template("tiles", tile_scope="collections"))

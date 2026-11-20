@@ -1,6 +1,7 @@
 import { productById } from '../data/products.js';
 import { track } from '../analytics/events.js?v=2';
 import { mountSearch } from './catalog-ui.js?v=5';
+import { mountCreatorFilm } from './home-film-media.js';
 import { mountCollection } from './collection-filter.js?v=2';
 import { mountProductSizes } from './product-size.js';
 import { renderCart } from './cart-ui.js?v=1';
@@ -40,6 +41,7 @@ function mountPage() {
   if (frame?.querySelector('[data-product-form]')) track('product_view');
   enableNewsletterPreview(frame);
   mountSearch(frame);
+  mountCreatorFilm(frame);
   mountCollection(frame);
   mountProductSizes(frame);
   renderCart();
